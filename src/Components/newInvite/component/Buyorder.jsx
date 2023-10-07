@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import Header from '../Header'
+import Header from '../../ui/component/Header'
 import { useSelector, useDispatch } from 'react-redux';
-import { setName, setNumber, setAddress, setProductName, setProductCategory, setProductDescription, setPurchaseAmount, setBuyerId, resetNewBuying, executeNewBuying } from '../../reduxStore/features/newBuying/newBuyingSlice'
+
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -144,7 +144,7 @@ export default function Buyorder() {
 
   return (
     <>
-      <Header heading={'New Buying'} title={'Execute your new buying'} />
+      <Header heading={'New Invite'} title={'Fill information for creating new invite'} />
       {/* <div className='absolute bg-[rgba(0,0,0,0.5)] h-[100%] w-[100%] top-[0] left-0'>
         ...
         </div> */}

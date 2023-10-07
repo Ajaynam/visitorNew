@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import { IoIosOptions } from 'react-icons/io'
 import { FcBusinessman } from 'react-icons/fc'
-import Routingcomponent from './Routingcomponent';
+import Routingcomponent from '../../routingComponent/component/Routingcomponent';
 
-import Sidebar from './Sidebar';
+import Sidebar from '../../ui/component/Sidebar';
 import { Tooltip, Zoom } from '@mui/material';
 export default function Application() {
 
-  const [sideBarOpen, setSideBarState] = useState(false);
+  const [sideBarOpen, setSideBarState] = useState(true);
 
   const [mobileSideBar, setMobileBar] = useState(true);
 
@@ -34,13 +34,10 @@ export default function Application() {
 
           <h1 onClick={() => { setMobileBar(prev => !prev) }} className='block md:hidden hover:bg-gray-100 rounded-full'><IoIosOptions size={'28'} /></h1>
 
-          <div className='flex items-center'>
+          <div className='flex items-center gap-2'>
             <h1><FcBusinessman size={'30'} /></h1>
             <h1 className=' text-gray-500 text-[15px]'>
-              Admin<br></br>
-              <span className=' font-bold '>
-                Farmer
-              </span>
+              Admin
             </h1>
           </div>
         </nav>

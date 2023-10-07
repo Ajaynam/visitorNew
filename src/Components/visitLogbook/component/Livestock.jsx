@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Header from '../Header'
+import Header from '../../ui/component/Header'
 import axios from 'axios';
 import { LuView } from 'react-icons/lu'
 import { FiEdit2 } from 'react-icons/fi'
@@ -35,7 +35,7 @@ export default function Livestock() {
   },[])
   return (
     <>
-      <Header heading={'Live-stock'} title={'View your store'} />
+      <Header heading={'Visitor Logbook'} title={'All visit logs'} />
       <div className='w-[100%]'>
         <div className='bg-violet-500 grid grid-cols-6 p-2 text-white rounded-lg'>
           <div className={elementClass}><p>Sr. No</p></div>

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import './App.css';
-import Application from './Components/Application';
+import Application from './Components/mianApplication/component/Application';
 
 function App() {
 

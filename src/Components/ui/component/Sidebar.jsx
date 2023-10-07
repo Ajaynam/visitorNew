@@ -1,9 +1,9 @@
 import { Tooltip, Zoom } from '@mui/material'
 import React from 'react'
 import { AiFillAppstore, AiFillCloseCircle } from 'react-icons/ai'
-import { BiSolidStore, BiSolidTime } from 'react-icons/bi'
-import { BsFillCartPlusFill, BsFillCartDashFill } from 'react-icons/bs'
-import { HiCurrencyRupee } from 'react-icons/hi2'
+import { MdInsertInvitation } from 'react-icons/md'
+import {  RiLogoutCircleRFill } from 'react-icons/ri'
+import { FaListAlt } from 'react-icons/fa'
 import { Link } from 'react-router-dom';
 
 export default function Sidebar(props) {
@@ -12,36 +12,29 @@ export default function Sidebar(props) {
     {
       title: 'Dashboard',
       routeLink: 'dashboard',
-      icon:<AiFillAppstore size={20}/>
+      status:false,
+      icon:<AiFillAppstore size={22}/>
     },
     {
-      title: 'Livestock',
-      routeLink: 'livestock',
-      icon: <BiSolidStore size={20} />
+      title: 'Visitor Logbook',
+      routeLink: 'visit-logbook',
+      status: false,
+      icon: <FaListAlt size={20} />
 
     },
     {
-      title: 'Buy-order',
-      routeLink: 'buy-order',
-      icon: <BsFillCartPlusFill size={20} />
+      title: 'New Invite',
+      routeLink: 'new-invite',
+      status: false,
+      icon: <MdInsertInvitation size={23} />
 
-    },
+    }
+    ,
     {
-      title: 'Sell-order',
-      routeLink: 'sell-order',
-      icon: <BsFillCartDashFill size={20} />
-
-    },
-    {
-      title: 'Pending-transactions',
-      routeLink: 'pending-transactions',
-      icon: <BiSolidTime size={20} />
-
-    },
-    {
-      title: 'Completed-transactions',
-      routeLink: 'completed-transactions',
-      icon: <HiCurrencyRupee size={20} />
+      title: 'Logout',
+      routeLink: '',
+      status: false,
+      icon: <RiLogoutCircleRFill size={23} />
 
     }
   ]
@@ -51,7 +44,8 @@ export default function Sidebar(props) {
       {/* DESKTOP DRAWER */}
       <div div className={`${props.sideBarOpen ? 'w-[20%]' : 'w-[5%]'} hidden md:block left-0 absolute h-screen bg-gray-100 duration-300 border-e-2`
       } id='sidebarMain' >
-        <div className='top-0 w-[100%] h-[10%]'>
+        <div className='top-0 w-[100%] h-[10%] flex items-center justify-center'>
+          <img src='../images/visitorAppLogo.png' className={`${props.sideBarOpen ? 'h-[90%]' : 'h-[30%]'}`}></img>
         </div>
         <ul className='w-[100%] flex flex-col gap-4 items-center text-black text-l'>
           {
@@ -59,13 +53,13 @@ export default function Sidebar(props) {
               return (
                 props.sideBarOpen ?
                   
-                  <Link to={data.routeLink} className={`w-[90%] hover:bg-gray-300 p-2 rounded-lg flex items-center gap-2`} key={data.title}>
+                  <Link to={data.routeLink} className={`focus:bg-gray-300 w-[90%] hover:bg-gray-300 p-2 rounded-lg flex items-center gap-2`} key={data.title} onClick={(e) => {
+                    sideBarElements[index].status = true
+                  }}>
                     {data.icon}
                     {data.title}
                   </Link>
-                  
                   :
-                  
                   <Tooltip title={
                     <React.Fragment>
                         <h1 className='text-[15px] m-1'>{data.title}</h1>
