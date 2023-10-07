@@ -44,7 +44,7 @@ export default function Sidebar(props) {
       {/* DESKTOP DRAWER */}
       <div div className={`${props.sideBarOpen ? 'w-[20%]' : 'w-[5%]'} hidden md:block left-0 absolute h-screen bg-gray-100 duration-300 border-e-2`
       } id='sidebarMain' >
-        <div className='top-0 w-[100%] h-[10%] flex items-center justify-center'>
+        <div className='top-0 w-[100%] h-[10%] flex items-center justify-center mb-5'>
           <img src='../images/visitorAppLogo.png' className={`${props.sideBarOpen ? 'h-[90%]' : 'h-[30%]'}`}></img>
         </div>
         <ul className='w-[100%] flex flex-col gap-4 items-center text-black text-l'>

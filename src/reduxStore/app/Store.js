@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import newBuyingReducer from "../../Components/newInvite/store/newBuyingSlice";
+import newVisitReducer from "../../Components/newInvite/store/newVisitSlice";
 import storage from "redux-persist/lib/storage";
 import { persistReducer } from "redux-persist";
 import { combineReducers } from "@reduxjs/toolkit";
@@ -11,7 +11,7 @@ const persistConfig = {
 }
 
 const reducer = combineReducers({
- newBuying: newBuyingReducer,
+ newVisit: newVisitReducer,
 })
 
 const persistedReducer=persistReducer(persistConfig,reducer)
