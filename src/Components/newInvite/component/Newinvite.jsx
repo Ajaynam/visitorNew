@@ -9,7 +9,7 @@ import $ from 'jquery'
 import { BiSolidCartAdd } from 'react-icons/bi' 
 import { AiOutlineReload } from 'react-icons/ai'
 import { setName, setNumber, setEmail, setGender, setIdtype, setIdnumber, resetNewBuying } from '../store/newVisitSlice'
-export default function NewInvite() {
+export default function Newinvite() {
 
   const inputClass = 'border-2 outline-none p-2 rounded mt-2 border-[rgba(0,0,0,0.1)] focus:border-violet-600 focus:border-[2px] resize-none';
   const inputClassEmpty = 'border-2 outline-none p-2 rounded mt-2 border-red-400 focus:border-violet-600 focus:border-[2px] resize-none';

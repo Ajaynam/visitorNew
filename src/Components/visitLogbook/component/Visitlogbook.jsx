@@ -6,7 +6,7 @@ import { FiEdit2 } from 'react-icons/fi'
 import { BiSkipPrevious, BiSkipNext } from 'react-icons/bi'
 import { Tooltip, Zoom } from '@mui/material';
 import { MdOutlineDeleteOutline } from 'react-icons/md'
-export default function Livestock() {
+export default function Visitlogbook() {
 
   const availableStocksAPI = 'http://localhost:8000/data/available-stock';
 
