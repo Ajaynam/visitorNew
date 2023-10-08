@@ -11,22 +11,22 @@ export default function Sidebar(props) {
   const sideBarElements = [
     {
       title: 'Dashboard',
-      routeLink: 'dashboard',
+      routeLink: '/',
       status:false,
-      icon:<AiFillAppstore size={22}/>
+      icon:<AiFillAppstore size={22} color='gray'/>
     },
     {
       title: 'Visitor Logbook',
       routeLink: 'visit-logbook',
       status: false,
-      icon: <FaListAlt size={20} />
+      icon: <FaListAlt size={20} color='gray' />
 
     },
     {
       title: 'New Invite',
       routeLink: 'new-invite',
       status: false,
-      icon: <MdInsertInvitation size={23} />
+      icon: <MdInsertInvitation size={23} color='gray' />
 
     }
     ,
@@ -34,20 +34,23 @@ export default function Sidebar(props) {
       title: 'Logout',
       routeLink: '',
       status: false,
-      icon: <RiLogoutCircleRFill size={23} />
+      icon: <RiLogoutCircleRFill size={23} color='gray' />
 
     }
   ]
 
+
+  
+
   return (
     <>
-      {/* DESKTOP DRAWER */}
+      
       <div div className={`${props.sideBarOpen ? 'w-[20%]' : 'w-[5%]'} hidden md:block left-0 absolute h-screen bg-gray-100 duration-300 border-e-2`
       } id='sidebarMain' >
-        <div className='top-0 w-[100%] h-[10%] flex items-center justify-center mb-5'>
-          <img src='../images/visitorAppLogo.png' className={`${props.sideBarOpen ? 'h-[90%]' : 'h-[30%]'}`}></img>
+        <div className='top-0 w-[100%] h-[10%] flex '>
+          <img src='../images/visitorAppLogo.png' className={`${props.sideBarOpen ? 'h-[60%] ml-10 my-4' : 'h-[30%]'}`}></img>
         </div>
-        <ul className='w-[100%] flex flex-col gap-4 items-center text-black text-l'>
+        <ul className='w-[100%] mt-6 flex flex-col gap-4 items-center text-black text-l'>
           {
             sideBarElements.map((data, index) => {
               return (
@@ -84,7 +87,7 @@ export default function Sidebar(props) {
           p-4'>
             <AiFillCloseCircle size={25}/>
           </div>
-          <ul className='w-[100%] flex flex-col gap-4 items-start justify-start text-black text-l'>
+          <ul className='w-[100%]  flex flex-col gap-4 items-start justify-start text-black text-l'>
             {
               sideBarElements.map((data, index) => {
                 return (
