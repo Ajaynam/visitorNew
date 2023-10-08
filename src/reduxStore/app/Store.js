@@ -3,6 +3,7 @@ import newVisitReducer from "../../Components/newInvite/store/newVisitSlice";
 import storage from "redux-persist/lib/storage";
 import { persistReducer } from "redux-persist";
 import { combineReducers } from "@reduxjs/toolkit";
+// import userReducer from './userSlice';
 
 const persistConfig = {
  key: 'root',
@@ -17,7 +18,8 @@ const reducer = combineReducers({
 const persistedReducer=persistReducer(persistConfig,reducer)
 
 const store = configureStore({
- reducer: persistedReducer
+ reducer: persistedReducer,
+//  user: userReducer,
 })
 
 export default store;

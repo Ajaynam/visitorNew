@@ -11,7 +11,7 @@ export default function Sidebar(props) {
   const sideBarElements = [
     {
       title: 'Dashboard',
-      routeLink: 'dashboard',
+      routeLink: '/',
       status:false,
       icon:<AiFillAppstore size={22} color='gray'/>
     },
@@ -39,9 +39,12 @@ export default function Sidebar(props) {
     }
   ]
 
+
+  
+
   return (
     <>
-      {/* DESKTOP DRAWER */}
+      
       <div div className={`${props.sideBarOpen ? 'w-[20%]' : 'w-[5%]'} hidden md:block left-0 absolute h-screen bg-gray-100 duration-300 border-e-2`
       } id='sidebarMain' >
         <div className='top-0 w-[100%] h-[10%] flex '>
