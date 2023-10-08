@@ -18,7 +18,7 @@ const Dashboard = ({ userRole }) => {
       {/* {userRole === 'admin' && <AdminDashboard />}
       {userRole === 'staff' && <StaffDashboard />}
       {userRole === 'guard' && <GuardDashboard />} */}
-      <AdminDashboard/>
+      <GuardDashboard/>
     </div>
   );
 };

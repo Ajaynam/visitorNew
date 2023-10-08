@@ -1,5 +1,3 @@
-
-
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -7,15 +5,18 @@ import $ from 'jquery'
 import { BiSolidCartAdd } from 'react-icons/bi'
 import { AiOutlineReload } from 'react-icons/ai'
 import { setName, setNumber, setEmail, setGender, setIdtype, setIdnumber, resetNewBuying } from '../store/newVisitSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import React, { useState } from 'react';
+import Header from '../../ui/component/Header';
 export default function Newinvite() {
 
-    //   const inputClass = 'border-2 outline-none p-2 rounded mt-2 border-[rgba(0,0,0,0.1)] focus:border-violet-600 focus:border-[2px] resize-none';
-    //   const inputClassEmpty = 'border-2 outline-none p-2 rounded mt-2 border-red-400 focus:border-violet-600 focus:border-[2px] resize-none';
+      const inputClass = 'border-2 outline-none p-2 rounded mt-2 border-[rgba(0,0,0,0.1)] focus:border-violet-600 focus:border-[2px] resize-none';
+      const inputClassEmpty = 'border-2 outline-none p-2 rounded mt-2 border-red-400 focus:border-violet-600 focus:border-[2px] resize-none';
 
     const newVisitAPI = 'http://localhost:8000/store/new-buying';
     const checkUserAPI = 'http://localhost:8000/data/check-user';
 
-    //   const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
     const newVisit = useSelector((state) => {
         console.log(state)
@@ -278,7 +279,7 @@ export default function Newinvite() {
                                 // fetchUsers(e)
                                 dispatch(setName(e.target.value))
                             }} onClick={() => { resetEmpty() }}></input>
-                            <div className='grid absolute bg-white w-[100] mt-20 max-h-60 overflow-auto shadow-xl border rounded'>
+                            {/* <div className='grid absolute bg-white w-[100] mt-20 max-h-60 overflow-auto shadow-xl border rounded'>
                                 {
                                     existingUser.map((item, index) => {
                                         return (
@@ -292,7 +293,7 @@ export default function Newinvite() {
                                         )
                                     })
                                 }
-                            </div>
+                            </div> */}
                         </div>
 
                         {/* Visitor Number */}
@@ -421,7 +422,7 @@ export default function Newinvite() {
 
 
             {/* Visitataion details */}
-            <div className='grid w-[100%] md:grid-cols-2 lg:grid-cols-4 gap-5 gap-y-10 p-6 border rounded-lg mb-8'>
+            <div className='grid w-[100%] md:grid-cols-2 lg:grid-cols-3 gap-5 gap-y-10 p-6 border rounded-lg mb-8'>
 
                 <div className='col-span-full text-lg font-semibold'>
                     <h1 className='text-black'>Visit details</h1>
@@ -437,10 +438,10 @@ export default function Newinvite() {
                     <input type='time' id='cintime' className={emptyData.cintime ? inputClass : inputClassEmpty} placeholder='Visit date...' value={newVisit.country} onChange={(e) => { dispatch(setAddress(e.target.value)) }} onClick={() => { resetEmpty() }}></input>
                 </div>
 
-                <div className='flex flex-col'>
+                {/* <div className='flex flex-col'>
                     <label htmlFor='couttime' className={`${emptyData.couttime ? 'text-black' : 'text-red-500'}`}>{labels.couttime}</label>
                     <input type='time' id='couttime' className={emptyData.couttime ? inputClass : inputClassEmpty} placeholder='Visit date...' value={newVisit.country} onChange={(e) => { dispatch(setAddress(e.target.value)) }} onClick={() => { resetEmpty() }}></input>
-                </div>
+                </div> */}
 
                 <div className='flex flex-col'>
                     <label htmlFor='host' className={`${emptyData.host ? 'text-black' : 'text-red-500'}`}>{labels.host}</label>
@@ -469,14 +470,14 @@ export default function Newinvite() {
             <div className='grid grid-cols-1 w-full mb-10'>
                 <div className='flex item-center justify-center md:justify-start gap-3'>
                     <button className='text-white p-2 w-[15%] rounded bg-violet-600 hover:bg-violet-700' onClick={() => { executeBuying() }}>
-                        <h1 className='flex items-center justify-center gap-3'>BUY<BiSolidCartAdd size={20} /></h1></button>
+                        <h1 className='flex items-center justify-center gap-3'>Create Invite</h1></button>
                     <ToastContainer autoClose={2000} />
                     <button className='text-violet-600 bg-white p-2 w-[15%] border border-violet-600 rounded hover:text-white hover:border-red-500 hover:bg-red-500' onClick={() => {
                         resetEmpty()
                         $('#productCategory').val('0')
                         dispatch(resetNewBuying())
                     }} >
-                        <h1 className='flex items-center justify-center gap-3'>CLEAR<AiOutlineReload /></h1>
+                        <h1 className='flex items-center justify-center gap-3'>Clear</h1>
                     </button>
                 </div>
 

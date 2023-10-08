@@ -5,9 +5,10 @@ import { MdInsertInvitation } from 'react-icons/md'
 import {  RiLogoutCircleRFill } from 'react-icons/ri'
 import { FaListAlt } from 'react-icons/fa'
 import { Link } from 'react-router-dom';
-
+import { updateState } from '../../login/store/authSlice'
+import { useDispatch } from 'react-redux'
 export default function Sidebar(props) {
-
+  const dispatch = useDispatch();
   const sideBarElements = [
     {
       title: 'Dashboard',
@@ -58,6 +59,11 @@ export default function Sidebar(props) {
                   
                   <Link to={data.routeLink} className={`focus:bg-gray-300 w-[90%] hover:bg-gray-300 p-2 rounded-lg flex items-center gap-2`} key={data.title} onClick={(e) => {
                     sideBarElements[index].status = true
+                    data.title === 'Logout' ?
+                      <>
+                        {dispatch(updateState())}
+                      </> :
+                      <></>
                   }}>
                     {data.icon}
                     {data.title}

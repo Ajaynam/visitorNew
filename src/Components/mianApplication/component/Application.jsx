@@ -5,7 +5,7 @@ import Routingcomponent from '../../routingComponent/component/Routingcomponent'
 import Sidebar from '../../ui/component/Sidebar';
 import { Tooltip, Zoom } from '@mui/material';
 
-export default function Application() {
+export default function Application(props) {
   const [sideBarOpen, setSideBarState] = useState(true);
   const [mobileSideBar, setMobileBar] = useState(true);
   const [isDropdownOpen, setDropdownOpen] = useState(false); // New state for the dropdown
@@ -87,7 +87,7 @@ export default function Application() {
 
         {/*PageWindow*/}
         <div className=' -z-10 top-[8%] left-0 w-[100%] h-[92%] bg-white overflow-auto px-8 pt-6 flex flex-col items-start justify-start'>
-          <Routingcomponent />
+          <Routingcomponent/>
         </div>
       </div>
     </>
