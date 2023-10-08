@@ -411,16 +411,6 @@ export default function Newinvite() {
 
 
 
-
-
-
-
-
-
-
-
-
-
             {/* Visitataion details */}
             <div className='grid w-[100%] md:grid-cols-2 lg:grid-cols-3 gap-5 gap-y-10 p-6 border rounded-lg mb-8'>
 
