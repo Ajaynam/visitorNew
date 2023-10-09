@@ -1,37 +1,30 @@
 import React, { useEffect, useState } from 'react'
-
+import Header from '../../ui/component/Header'
 import axios from 'axios';
 import { LuView } from 'react-icons/lu'
 import { FiEdit2 } from 'react-icons/fi'
 import { BiSkipPrevious, BiSkipNext } from 'react-icons/bi'
 import { Tooltip, Zoom } from '@mui/material';
 import { MdOutlineDeleteOutline } from 'react-icons/md'
-import Header from '../../ui/component/Header';
-export default function Visitlogbook() {
+import { Link } from 'react-router-dom';
+export default function EmployeeTable() {
 
-  const availableStocksAPI = 'http://localhost:8000/visitor/visit-logbook';
+  const availableStocksAPI = 'http://localhost:8000/data/available-stock';
 
-  const elementClass = 'flex items-start justify-center text-justify';
+  const elementClass = 'col-span-full md:col-span-1 flex items-start justify-center text-justify';
 
-  const [visitorLogbook, setVisitorLogbook] = useState([]);
+  const [allStock, setAllStock] = useState([]);
   const perPage = 10;
   const [startIndex, setstartIndex] = useState(0)
   const startPage = startIndex * perPage;
   const endPage = startPage + perPage;
-<<<<<<< HEAD
-  const lastCount = Math.ceil(visitorLogbook.length / perPage);
-  console.log('LC : ', lastCount)
-  
-  const getVisitorLogbook = () => {
-=======
   const lastCount = Math.ceil(allStock.length / perPage);
   console.log('LC : ', lastCount)
   const getAvailableStocks = () => {
->>>>>>> 641fd3bc3b826cfd5cb48507ddb056d53e934430
     axios.get(availableStocksAPI)
       .then((response) => {
         console.log(response.data)
-        setVisitorLogbook(response.data)
+        setAllStock(response.data)
       })
       .catch((error) => {
         console.log(error.message)
@@ -39,46 +32,44 @@ export default function Visitlogbook() {
   }
 
   useEffect(() => {
-<<<<<<< HEAD
-    getVisitorLogbook();
-  },[])
-=======
     getAvailableStocks();
   }, [])
->>>>>>> 641fd3bc3b826cfd5cb48507ddb056d53e934430
   return (
     <>
-      <Header heading={'Visitor Logbook'} title={'All visit logs'} />
-      <div className='w-[100%]'>
+      <div className="md:grid md:grid-cols-8">
+        <div className='md:col-span-7'>
+          <Header heading={'Employee List'} title={'All Employee'} />
+        </div>
+        <div className='md:col-span-1'>
+          <Link to='/add-employee'>
+            <button className="mt-4   bg-blue-500 text-white py-2 lg:px-8 px-16 rounded-[10px] hover:bg-blue-600 transition duration-300 ease-in-out"  >  Add New   </button>
+
+          </Link>
+        </div>
+      </div>
+
+      <div className='w-[100%] mt-2'>
         <div className='bg-violet-500 grid grid-cols-6 p-2 text-white rounded-lg'>
-          <div className={elementClass}><p>Host</p></div>
-          <div className={elementClass}><p>Visitor</p></div>
-          <div className={elementClass}><p>Mobile</p></div>
-          <div className={elementClass}><p>VID</p></div>
-          <div className={elementClass}><p>Check-In</p></div>
-          <div className={elementClass}><p>Check-Out</p></div>
+          <div className={elementClass}><p>Id</p></div>
+          <div className={elementClass}><p>Employee Name</p></div>
+          <div className={elementClass}><p>Phone</p></div>
+          <div className={elementClass}><p>Email</p></div>
+          <div className={elementClass}><p>Department</p></div>
+          <div className={elementClass}><p>Action</p></div>
         </div>
         {
-          visitorLogbook.length?
+          allStock.length ?
             <>
               {
-                visitorLogbook.slice(startPage,endPage).map((item, index) => {
+                allStock.slice(startPage, endPage).map((item, index) => {
                   return (
-                    <div className={` overflow-auto grid grid-cols-6 p-2 text-gray-500 ${(index % 2 === 0) ? '' : 'bg-violet-100 rounded-lg'}`} key={index}>
-                      <div className={elementClass}><p>{item.hostName}</p></div>
-                      <div className={elementClass}><p>{item.visitorName}</p></div>
-                      <div className={elementClass}><p>{item.visitorMobile}</p></div>
-                      <div className={elementClass}><p>{item.visitorId}</p></div>
-                      <div className={elementClass}><p>{item.checkInTime}</p></div>
-                      <div className={elementClass}>
-                        {
-                          item.checOutTime ?
-                            <p>{item.checOutTime}</p>:
-                            <p>Pending</p>
-                            
-                        }
-                      </div>
-                      {/* <div className='col-span-full md:col-span-1 flex items-start justify-center text-justify gap-3'>
+                    <div className={` grid grid-cols-6 p-2 text-gray-500 ${(index % 2 === 0) ? '' : 'bg-violet-100 rounded-lg'}`}>
+                      <div className={elementClass}><p>{index + 1}</p></div>
+                      <div className={elementClass}><p>{item.productcategory}</p></div>
+                      <div className={elementClass}><p>{item.productname}</p></div>
+                      <div className={elementClass}><p>{item.purchase_amount}</p></div>
+                      <div className={elementClass}><p>{item.purchased_date}</p></div>
+                      <div className='col-span-full md:col-span-1 flex items-start justify-center text-justify gap-3'>
                         <Tooltip title={
                           <React.Fragment>
                             <h1 className='text-[10px]'>View</h1>
@@ -106,7 +97,7 @@ export default function Visitlogbook() {
                             <h1 className='text-white'><MdOutlineDeleteOutline size={10} /></h1>
                           </button>
                         </Tooltip>
-                      </div> */}
+                      </div>
                     </div>
                   )
                 })
@@ -117,7 +108,7 @@ export default function Visitlogbook() {
         }
       </div>
       {
-        visitorLogbook.length ?
+        allStock.length ?
           <div className=' w-[100%] text-violet-700 mt-7 flex items-center justify-center gap-x-5 '>
             <button className='p-1 bg-violet-100 rounded-full' onClick={() => {
               setstartIndex((prev) => {

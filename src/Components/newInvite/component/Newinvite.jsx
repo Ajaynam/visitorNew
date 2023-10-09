@@ -340,7 +340,7 @@ export default function Newinvite() {
                     <ToastContainer autoClose={2000} />
                     <button className='text-violet-600 bg-white p-2 w-[40%] md:w-[15%] border border-violet-600 rounded hover:text-white hover:border-red-500 hover:bg-red-500' onClick={() => {
                         resetEmpty()
-                        $('#productCategory').val('0')
+                        // $('#productCategory').val('0')
                         dispatch(resetNewBuying())
                     }} >
                         <h1 className='flex items-center justify-center gap-3'>Clear</h1>

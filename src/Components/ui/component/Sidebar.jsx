@@ -29,6 +29,13 @@ export default function Sidebar(props) {
       status: false,
       icon: <MdInsertInvitation size={23} color='gray' />
 
+    },
+    {
+      title: 'Manange Employees',
+      routeLink: '/employee-table',
+      status: false,
+      icon: <MdInsertInvitation size={23} color='gray' />
+
     }
     ,
     {
