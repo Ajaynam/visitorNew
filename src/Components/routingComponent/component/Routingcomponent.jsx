@@ -3,10 +3,14 @@ import { Route, Routes } from 'react-router-dom'
 import Dashboard from '../../dashboard/component/Dashboard'
 import Loginwindow from '../../login/component/Loginwindow'
 import Newinvite from '../../newInvite/component/Newinvite'
-import Visitlogbook from '../../visitLogbook/component/Visitlogbook'
+
 import VisitorCard from '../../VisitorCard/Components/VisitorCard'
 import UserProfile from '../../Profile/Components/Profile'
 import { useSelector } from 'react-redux'
+import EmployeeForm from '../../addEmployee/components/EmployeeForm'
+import EmployeeTable from '../../employeeTable/components/EmployeeTable'
+import Visitlogbook from '../../visitLogbook/component/Visitlogbook'
+
 export default function Routingcomponent(props) {
   const isLogedIn = useSelector((state) => {
     return state.authSlice.isLogedIn
@@ -40,6 +44,18 @@ export default function Routingcomponent(props) {
               </React.Fragment>
             }></Route>
 
+            <Route path='/add-employee' element={
+              <React.Fragment>
+                <EmployeeForm/>
+              </React.Fragment>
+            }></Route>
+            
+            <Route path='/employee-table' element={
+              <React.Fragment>
+                <EmployeeTable/>
+              </React.Fragment>
+            }></Route>
+            
             <Route path='/visitor-card' element={
               <React.Fragment>
                 <VisitorCard/>

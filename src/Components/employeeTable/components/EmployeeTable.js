@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
-
+import Header from '../../ui/component/Header'
 import axios from 'axios';
 import { LuView } from 'react-icons/lu'
 import { FiEdit2 } from 'react-icons/fi'
 import { BiSkipPrevious, BiSkipNext } from 'react-icons/bi'
 import { Tooltip, Zoom } from '@mui/material';
 import { MdOutlineDeleteOutline } from 'react-icons/md'
-import Header from '../../ui/component/Header';
-export default function Visitlogbook() {
+import { Link } from 'react-router-dom';
+export default function EmployeeTable() {
 
   const availableStocksAPI = 'http://localhost:8000/data/available-stock';
 
@@ -36,14 +36,25 @@ export default function Visitlogbook() {
   }, [])
   return (
     <>
-      <Header heading={'Visitor Logbook'} title={'All visit logs'} />
-      <div className='w-[100%]'>
+      <div className="md:grid md:grid-cols-8">
+        <div className='md:col-span-7'>
+          <Header heading={'Employee List'} title={'All Employee'} />
+        </div>
+        <div className='md:col-span-1'>
+          <Link to='/add-employee'>
+            <button className="mt-4   bg-blue-500 text-white py-2 lg:px-8 px-16 rounded-[10px] hover:bg-blue-600 transition duration-300 ease-in-out"  >  Add New   </button>
+
+          </Link>
+        </div>
+      </div>
+
+      <div className='w-[100%] mt-2'>
         <div className='bg-violet-500 grid grid-cols-6 p-2 text-white rounded-lg'>
-          <div className={elementClass}><p>Sr. No</p></div>
-          <div className={elementClass}><p>Product Category</p></div>
-          <div className={elementClass}><p>Product Name</p></div>
-          <div className={elementClass}><p>Purchase Amount</p></div>
-          <div className={elementClass}><p>Purchased Date</p></div>
+          <div className={elementClass}><p>Id</p></div>
+          <div className={elementClass}><p>Employee Name</p></div>
+          <div className={elementClass}><p>Phone</p></div>
+          <div className={elementClass}><p>Email</p></div>
+          <div className={elementClass}><p>Department</p></div>
           <div className={elementClass}><p>Action</p></div>
         </div>
         {

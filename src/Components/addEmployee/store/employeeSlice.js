@@ -18,21 +18,16 @@ const initialState = {
   mobile:'',
   email:'',
   address:'',
-  image:'',
   gender:'',
-  identityType:'',
-  identityNumber:'',
-  visitDate:'',
-  checkInTime:'',
-  host:'',
-  purpose:'',
+  password:'',
+  department:'',
   databaseResponse: {},
   loading: false,
   error: ''
 }
 
-const newVisitSlice = createSlice({
-  name: 'newVisit',
+const newEmployeeSlice = createSlice({
+  name: 'newEmployee',
   initialState,
   reducers: {
     setName: (state, action) => {
@@ -50,22 +45,13 @@ const newVisitSlice = createSlice({
     setGender: (state, action) => {
       state.gender = action.payload
     },
-    setIdtype: (state, action) => {
-      state.identityType = action.payload
-    },
-    setIdnumber: (state, action) => {
-      state.identityNumber = action.payload
-    },
-    setVisitDate: (state, action) => {
-      state.visitDate=action.payload
-    },
-    setCheckInTime: (state, action) => {
-      state.checkInTime = action.payload
-    },
-    setHost: (state, action) => {
+ 
+ 
+ 
+    setPassword: (state, action) => {
       state.host = action.payload
     },
-    setPurpose: (state, action) => {
+    setDepartment: (state, action) => {
       state.purpose = action.payload
     },
     resetNewBuying: (state, action) => {
@@ -73,13 +59,9 @@ const newVisitSlice = createSlice({
       state.mobile = ''
       state.email = ''
       state.gender = ''
-      state.identityType = ''
-      state.identityNumber = ''
+      state.password = ''
+      state.department = ''
       state.address=''
-      state.visitDate=''
-      state.checkInTime=''
-      state.host = ''
-      state.purpose = ''
       state.databaseResponse = {}
       state.loading= false
       state.error= ''
@@ -101,6 +83,6 @@ const newVisitSlice = createSlice({
   }
 })
 
-export const { setName, setMobile, setEmail,setAddress, setGender, setIdtype, setIdnumber,setVisitDate, setCheckInTime, setHost,setPurpose, resetNewBuying } = newVisitSlice.actions;
+export const { setName, setMobile, setEmail,setAddress, setGender, setIdtype, setPassword,setDepartment, resetNewBuying } = newEmployeeSlice.actions;
 
-export default newVisitSlice.reducer;
+export default newEmployeeSlice.reducer;
