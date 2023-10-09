@@ -86,7 +86,7 @@ export default function Application(props) {
         </nav>
 
         {/*PageWindow*/}
-        <div className=' -z-10 top-[8%] left-0 w-[100%] h-[92%] bg-white overflow-auto px-8 pt-6 flex flex-col items-start justify-start'>
+        <div className='top-[8%] left-0 w-[100%] h-[92%] bg-white overflow-auto px-8 pt-6 flex flex-col items-start justify-start '>
           <Routingcomponent/>
         </div>
       </div>

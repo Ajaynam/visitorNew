@@ -12,7 +12,8 @@ const authSlice = createSlice({
  initialState,
  reducers: {
   updateState: (state, action) => {
-   state.isLogedIn=!state.isLogedIn
+   console.log(action.payload)
+   state.isLogedIn=action.payload
   }
  }
 })

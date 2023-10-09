@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
 
 
@@ -14,25 +14,18 @@ export const executeNewBuying = createAsyncThunk('executeBuying', async (newBuyi
 })
 
 const initialState = {
-  name: '',
-  number: '',
-  email: '',
-  gender: '',
-  idtype: '',
-  idnumber: '',
-  hnumber: '',
-  floor: '',
-  building: '',
-  landmark: '',
-  village: '',
-  pincode: '',
-  state: '',
-  country: '',
-  date: '',
-  cintime: '',
-  couttime: '',
-  host: '',
-  purpose: '',
+  name:'',
+  mobile:'',
+  email:'',
+  address:'',
+  image:'',
+  gender:'',
+  identityType:'',
+  identityNumber:'',
+  visitDate:'',
+  checkInTime:'',
+  host:'',
+  purpose:'',
   databaseResponse: {},
   loading: false,
   error: ''
@@ -45,39 +38,46 @@ const newVisitSlice = createSlice({
     setName: (state, action) => {
       state.name = action.payload
     },
-    setNumber: (state, action) => {
-      state.number = action.payload
+    setMobile: (state, action) => {
+      state.mobile = action.payload
     },
     setEmail: (state, action) => {
       state.email = action.payload
+    },
+    setAddress: (state, action) => {
+      state.address=action.payload
     },
     setGender: (state, action) => {
       state.gender = action.payload
     },
     setIdtype: (state, action) => {
-      state.idtype = action.payload
+      state.identityType = action.payload
     },
     setIdnumber: (state, action) => {
-      state.idnumber = action.payload
+      state.identityNumber = action.payload
+    },
+    setVisitDate: (state, action) => {
+      state.visitDate=action.payload
+    },
+    setCheckInTime: (state, action) => {
+      state.checkInTime = action.payload
+    },
+    setHost: (state, action) => {
+      state.host = action.payload
+    },
+    setPurpose: (state, action) => {
+      state.purpose = action.payload
     },
     resetNewBuying: (state, action) => {
       state.name = ''
-      state.number = ''
+      state.mobile = ''
       state.email = ''
       state.gender = ''
-      state.idtype = ''
-      state.idnumber = ''
-      state.hnumber = ''
-      state.floor = ''
-      state.building = ''
-      state.landmark = ''
-      state.village = ''
-      state.pincode = ''
-      state.state = ''
-      state.country = ''
-      state.date = ''
-      state.cintime = ''
-      state.couttime = ''
+      state.identityType = ''
+      state.identityNumber = ''
+      state.address=''
+      state.visitDate=''
+      state.checkInTime=''
       state.host = ''
       state.purpose = ''
       state.databaseResponse = {}
@@ -101,6 +101,6 @@ const newVisitSlice = createSlice({
   }
 })
 
-export const { setName, setNumber, setEmail, setGender, setIdtype, setIdnumber, resetNewBuying } = newVisitSlice.actions;
+export const { setName, setMobile, setEmail,setAddress, setGender, setIdtype, setIdnumber,setVisitDate, setCheckInTime, setHost,setPurpose, resetNewBuying } = newVisitSlice.actions;
 
 export default newVisitSlice.reducer;
