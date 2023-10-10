@@ -6,6 +6,7 @@ import CheckinAndOut from './CheckinAndOut.js';
 import Chart from '../../../ui/component/charts/Chart.js';
 import Card from '../../../ui/component/cards/Card.js';
 import Header from '../../../ui/component/Header.jsx';
+import EmployeeTable from '../../../employeeTable/components/EmployeeTable.js';
 
 export default function GuardDashboard() {
 
