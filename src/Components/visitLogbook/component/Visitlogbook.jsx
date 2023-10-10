@@ -7,9 +7,14 @@ import { BiSkipPrevious, BiSkipNext } from 'react-icons/bi'
 import { Tooltip, Zoom } from '@mui/material';
 import { MdOutlineDeleteOutline } from 'react-icons/md'
 import Header from '../../ui/component/Header';
+import { BsSearch } from 'react-icons/bs'
+import { error } from 'jquery';
+import * as XLSX from 'xlsx'
+import { BiDownload } from 'react-icons/bi'
 export default function Visitlogbook() {
 
-  const availableStocksAPI = 'http://localhost:8000/visitor/visit-logbook';
+  const visitorLogbookAPI = 'http://localhost:8000/visitor/visit-logbook';
+  const searchVisitorAPI = 'http://localhost:8000/visitor/search-visitor';
 
   const elementClass = 'flex items-start justify-center text-justify';
 
@@ -18,17 +23,11 @@ export default function Visitlogbook() {
   const [startIndex, setstartIndex] = useState(0)
   const startPage = startIndex * perPage;
   const endPage = startPage + perPage;
-<<<<<<< HEAD
   const lastCount = Math.ceil(visitorLogbook.length / perPage);
   console.log('LC : ', lastCount)
   
   const getVisitorLogbook = () => {
-=======
-  const lastCount = Math.ceil(allStock.length / perPage);
-  console.log('LC : ', lastCount)
-  const getAvailableStocks = () => {
->>>>>>> 641fd3bc3b826cfd5cb48507ddb056d53e934430
-    axios.get(availableStocksAPI)
+    axios.get(visitorLogbookAPI)
       .then((response) => {
         console.log(response.data)
         setVisitorLogbook(response.data)
@@ -38,19 +37,49 @@ export default function Visitlogbook() {
       })
   }
 
+  const searchVisitors = (e) => {
+    if (e.target.value === '')
+      getVisitorLogbook();
+    else {
+      axios.post(searchVisitorAPI, { key: e.target.value })
+        .then((response) => {
+          setVisitorLogbook(response.data)
+        })
+        .catch((error) => {
+        console.log(error)
+      })
+    }
+  }
+
+  const exportExcelData = () => {
+    if (visitorLogbook.length) {
+      const worksheet = XLSX.utils.json_to_sheet(visitorLogbook);
+      const workbook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+      //let buffer = XLSX.write(workbook, { bookType: "xlsx", type: "buffer" });
+      //XLSX.write(workbook, { bookType: "xlsx", type: "binary" });
+      XLSX.writeFile(workbook, "DataSheet.xlsx");
+    }
+  }
+
   useEffect(() => {
-<<<<<<< HEAD
     getVisitorLogbook();
   },[])
-=======
-    getAvailableStocks();
-  }, [])
->>>>>>> 641fd3bc3b826cfd5cb48507ddb056d53e934430
   return (
     <>
       <Header heading={'Visitor Logbook'} title={'All visit logs'} />
       <div className='w-[100%]'>
-        <div className='bg-violet-500 grid grid-cols-6 p-2 text-white rounded-lg'>
+        <div className='mb-2 flex items-center gap-2 justify-between'>
+          <div className='flex items-center justify-center gap-2'>
+            <BsSearch className='text-gray-500' size={20} />
+            <input type='text' placeholder='Search...' className='border-2 outline-none px-1 md:px-5 py-[2px] rounded border-[rgba(0,0,0,0.1)] focus:border-violet-600 focus:border-[2px] resize-none' onChange={(e) => { searchVisitors(e) }}></input>
+          </div>
+          <button onClick={() => { exportExcelData() }} className='rounded bg-violet-600 hover:bg-violet-700 px-3 py-1 text-white flex items-center justify-center gap-2'>
+            Export
+            <BiDownload />
+          </button>
+        </div>
+        <div className='bg-violet-500 grid grid-cols-6 p-2 text-[12px] md:text-md-center text-white rounded-lg'>
           <div className={elementClass}><p>Host</p></div>
           <div className={elementClass}><p>Visitor</p></div>
           <div className={elementClass}><p>Mobile</p></div>

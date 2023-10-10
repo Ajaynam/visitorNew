@@ -2,15 +2,17 @@
 
 import React from 'react';
 
+import { useDispatch } from 'react-redux';
 
+import {updateState} from '../../login/store/authSlice'
+const Login = (props) => {
 
-
-const Login = () => {
+    const dispatch = useDispatch();
 
   
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-100">
+        <div className="min-h-screen flex items-center justify-center">
             <div className="bg-white p-8 rounded shadow-md max-w-md w-full">
                 <h2 className="text-2xl font-semibold mb-4 text-center">Login</h2>
                 <form>
@@ -44,6 +46,7 @@ const Login = () => {
                         <button
                             className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue active:bg-blue-700"
                             type="submit"
+                            onClick={()=>{dispatch(updateState(true))}}
                         >
                             Sign In
                         </button>

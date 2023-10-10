@@ -76,7 +76,7 @@ export default function Application(props) {
               <div className='z-10 top-full left-0 mt-2 bg-white border rounded-md shadow-md'>
                 <ul>
                   <li className='px-4 py-2'>Your Profile</li>
-                  <li className='px-4 py-2'>Notifications</li>
+                  {/* <li className='px-4 py-2'>Notifications</li> */}
                   <li className='px-4 py-2'>Logout</li>
                 </ul>
               </div>
@@ -86,7 +86,7 @@ export default function Application(props) {
         </nav>
 
         {/*PageWindow*/}
-        <div className='top-[8%] left-0 w-[100%] h-[92%] bg-white overflow-auto px-8 pt-6 flex flex-col items-start justify-start '>
+        <div className='top-[8%] left-0 w-[100%] h-[92%] bg-white overflow-auto px-3 md:px-8 pt-6 flex flex-col items-start justify-start '>
           <Routingcomponent/>
         </div>
       </div>

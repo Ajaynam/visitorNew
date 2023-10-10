@@ -1,10 +1,9 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Dashboard from '../../dashboard/component/Dashboard'
-import Loginwindow from '../../login/component/Loginwindow'
+// import Loginwindow from '../../login/component/Loginwindow'
+import Login from '../../Auth/Login/Login'
 import Newinvite from '../../newInvite/Component/Newinvite'
-import Visitlogbook from '../../visitLogbook/component/Visitlogbook'
-import Newinvite from '../../newInvite/component/Newinvite'
 
 import VisitorCard from '../../VisitorCard/Components/VisitorCard'
 import UserProfile from '../../Profile/Components/Profile'
@@ -77,7 +76,7 @@ export default function Routingcomponent(props) {
           :
           <Routes>
             <Route path='*' element={
-              <Loginwindow setIsLogin={props.setIsLogin} />
+              <Login setIsLogin={props.setIsLogin} />
             }></Route>
           </Routes>
       }
