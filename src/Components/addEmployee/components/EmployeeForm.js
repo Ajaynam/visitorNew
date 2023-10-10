@@ -1,13 +1,14 @@
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { setName, setMobile, setEmail, setAddress, setGender, setPassword, setRePassword, setDepartment, setRole, resetNewBuying } from '../store/employeeSlice'
+import { setName, setMobile, setEmail, setAddress, setGender, setPassword, setRePassword, setRole, resetNewEmp } from '../store/employeeSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import React, { useEffect, useState } from 'react';
 import Header from '../../ui/component/Header';
 import baseurl from '../../../api/baseurl';
+import { useNavigate } from 'react-router-dom';
 export default function EmployeeForm() {
-
+    const Navigate = useNavigate();
     const inputClass = 'border-2 outline-none p-2 rounded mt-2 border-[rgba(0,0,0,0.1)] focus:border-violet-600 focus:border-[2px] resize-none';
     const inputClassEmpty = 'border-2 outline-none p-2 rounded mt-2 border-red-400 focus:border-violet-600 focus:border-[2px] resize-none';
 
@@ -88,11 +89,11 @@ export default function EmployeeForm() {
             setLabels(prev => ({ ...prev, password: 'Password mismatched !', rpassword: 'Password mismatched !' }))
             flag = 0;
         }
-        if (newEmployee.departmentId === '' || newEmployee.departmentId === '0') {
-            setEmptyData(prev => ({ ...prev, department: false }))
-            setLabels(prev => ({ ...prev, department: 'Department required !' }))
-            flag = 0;
-        }
+        // if (newEmployee.departmentId === '' || newEmployee.departmentId === '0') {
+        //     setEmptyData(prev => ({ ...prev, department: false }))
+        //     setLabels(prev => ({ ...prev, department: 'Department required !' }))
+        //     flag = 0;
+        // }
         if (newEmployee.roleId === '' || newEmployee.roleId === '0') {
             setEmptyData(prev => ({ ...prev, role: false }))
             setLabels(prev => ({ ...prev, role: 'Role required !' }))
@@ -102,7 +103,15 @@ export default function EmployeeForm() {
             console.log(newEmployee)
             axios.post(addNewEmployee, newEmployee)
                 .then((response) => {
-                    console.log(response.data)
+                    if (response.data.success) {
+                        toast.success('Staff added successfully')
+                        dispatch(resetNewEmp());
+                        setTimeout(() => {
+                            Navigate('/employee-table')
+                        }, 3000)
+
+                    }
+                        
                 })
                 .catch((error) => {
                     console.log(error)
@@ -177,6 +186,7 @@ export default function EmployeeForm() {
 
     return (
         <>
+            <ToastContainer autoClose={2000} />
             <Header heading={'Add New Employee'} title={'Fill information for creating new Employee'} />
             <div className='grid w-[100%] lg:grid-cols-3 md:grid-cols-2 gap-5 gap-y-10 p-6 border-2 rounded-lg mb-8'>
                 <div className='col-span-full text-lg font-semibold'>
@@ -231,7 +241,7 @@ export default function EmployeeForm() {
                 </div>
 
                 {/* Department */}
-                <div className='flex flex-col'>
+                {/* <div className='flex flex-col'>
                     <label htmlFor='employeeDepartment' className={`${emptyData.department ? 'text-black' : 'text-red-500'}`}>{labels.department}</label>
                     <select id='employeeDepartment' className={emptyData.department ? inputClass : inputClassEmpty} onChange={(e) => { dispatch(setDepartment(e.target.value)) }} onClick={(e) => { resetEmpty() }}>
                         <option value='0'>Select department</option>
@@ -243,7 +253,7 @@ export default function EmployeeForm() {
                             })
                         }
                     </select>
-                </div>
+                </div> */}
 
                 {/* Role */}
                 <div className='flex flex-col'>
@@ -298,7 +308,7 @@ export default function EmployeeForm() {
                     <button className='text-violet-600 bg-white p-2 w-[15%] border border-violet-600 rounded hover:text-white hover:border-red-500 hover:bg-red-500' onClick={() => {
                         resetEmpty()
                         // $('#productCategory').val('0')
-                        dispatch(resetNewBuying())
+                        dispatch(resetNewEmp())
                     }} >
                         <h1 className='flex items-center justify-center gap-3'>Clear</h1>
                     </button>

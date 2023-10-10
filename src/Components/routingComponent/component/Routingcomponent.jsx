@@ -4,7 +4,7 @@ import Dashboard from '../../dashboard/component/Dashboard'
 // import Loginwindow from '../../login/component/Loginwindow'
 import Login from '../../Auth/Login/Login'
 import Newinvite from '../../newInvite/Component/Newinvite'
-
+import PendingEntry from '../../PendingInvite/PendingInvite/PendingInvite'
 import VisitorCard from '../../VisitorCard/Components/VisitorCard'
 import UserProfile from '../../Profile/Components/Profile'
 import { useSelector } from 'react-redux'
@@ -37,7 +37,7 @@ export default function Routingcomponent(props) {
               </React.Fragment>
             }></Route>
 
-            <Route path='/new-invite' element={
+            <Route path='/new-entry' element={
               <React.Fragment>
                 <Newinvite />
               </React.Fragment>
@@ -72,6 +72,13 @@ export default function Routingcomponent(props) {
                 <VisitorCard />
               </React.Fragment>
             }></Route>
+
+            <Route path='/pending-entry' element={
+              <React.Fragment>
+                <PendingEntry />
+              </React.Fragment>
+            }></Route>
+
           </Routes>
           :
           <Routes>

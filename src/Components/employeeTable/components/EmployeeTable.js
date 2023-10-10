@@ -11,7 +11,8 @@ import { BiDownload } from 'react-icons/bi'
 import { BsSearch } from 'react-icons/bs'
 import { AiOutlineAppstoreAdd } from 'react-icons/ai'
 import baseurl from '../../../api/baseurl'
-import { error } from 'jquery';
+import * as XLSX from 'xlsx'
+
 export default function EmployeeTable() {
 
   const getEmployeeAPi = `${baseurl}employee/get-all-employee`;
@@ -28,7 +29,14 @@ export default function EmployeeTable() {
   const lastCount = Math.ceil(allEmployeeList.length / perPage);
   console.log('LC : ', lastCount)
 
-
+  const exportExcelData = () => {
+    if (allEmployeeList.length) {
+      const worksheet = XLSX.utils.json_to_sheet(allEmployeeList);
+      const workbook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+      XLSX.writeFile(workbook, "employeeData.csv");
+    }
+  }
 
   const getEmployeeList = () => {
     axios.get(getEmployeeAPi)
@@ -83,12 +91,11 @@ export default function EmployeeTable() {
       </div>
 
       <div className='w-[100%]'>
-        <div className='bg-violet-500 grid grid-cols-6 p-2 text-white rounded-lg'>
+        <div className='bg-violet-500 grid grid-cols-5 p-2 text-white rounded-lg'>
           <div className={elementClass}><p>Id</p></div>
           <div className={elementClass}><p>Employee Name</p></div>
           <div className={elementClass}><p>Phone</p></div>
           <div className={elementClass}><p>Email</p></div>
-          <div className={elementClass}><p>Department</p></div>
           <div className={elementClass}><p>Role</p></div>
         </div>
         {
@@ -97,12 +104,11 @@ export default function EmployeeTable() {
               {
                 allEmployeeList.slice(startPage, endPage).map((data, index) => {
                   return (
-                    <div className={` grid grid-cols-6 p-2 text-gray-500 ${(index % 2 === 0) ? '' : 'bg-violet-100 rounded-lg'}`}>
+                    <div className={` grid grid-cols-5 p-2 text-gray-500 ${(index % 2 === 0) ? '' : 'bg-violet-100 rounded-lg'}`}>
                       <div className={elementClass}><p>{data.id}</p></div>
                       <div className={elementClass}><p>{data.hostName}</p></div>
                       <div className={elementClass}><p>{data.hostMobile}</p></div>
                       <div className={elementClass}><p>{data.hostEmail}</p></div>
-                      <div className={elementClass}><p>{data.departmentName}</p></div>
                       <div className={elementClass}><p>{data.roleName}</p></div>
                     </div>
                   )
