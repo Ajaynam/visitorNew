@@ -1,17 +1,17 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import axios from 'axios'
+ import { createSlice } from '@reduxjs/toolkit'
+// import axios from 'axios'
 
 
-const newBuyingAPI = 'http://localhost:8000/store/new-buying';
+// const newBuyingAPI = 'http://localhost:8000/store/new-buying';
 
-export const executeNewBuying = createAsyncThunk('executeBuying', async (newBuying) => {
-  try {
-    const response = await axios.post(newBuyingAPI, newBuying)
-    return response.data
-  } catch (error) {
-    return error
-  }
-})
+// export const executeNewBuying = createAsyncThunk('executeBuying', async (newBuying) => {
+//   try {
+//     const response = await axios.post(newBuyingAPI, newBuying)
+//     return response.data
+//   } catch (error) {
+//     return error
+//   }
+// })
 
 const initialState = {
   name:'',
@@ -85,20 +85,20 @@ const newVisitSlice = createSlice({
       state.error= ''
     }
   },
-  extraReducers: (builder) => {
-    builder.addCase(executeNewBuying.pending, (state, action) => {
-      state.loading = true
-    })
-    builder.addCase(executeNewBuying.fulfilled, (state, action) => {
-      state.loading = false
-      console.log(action.payload)
-    })
-    builder.addCase(executeNewBuying.rejected, (state, action) => {
-      state.loading = true
-      console.log('REJECTED.....................')
-      state.error = action.payload
-    })
-  }
+  // extraReducers: (builder) => {
+  //   builder.addCase(executeNewBuying.pending, (state, action) => {
+  //     state.loading = true
+  //   })
+  //   builder.addCase(executeNewBuying.fulfilled, (state, action) => {
+  //     state.loading = false
+  //     console.log(action.payload)
+  //   })
+  //   builder.addCase(executeNewBuying.rejected, (state, action) => {
+  //     state.loading = true
+  //     console.log('REJECTED.....................')
+  //     state.error = action.payload
+  //   })
+  // }
 })
 
 export const { setName, setMobile, setEmail,setAddress, setGender, setIdtype, setIdnumber,setVisitDate, setCheckInTime, setHost,setPurpose, resetNewBuying } = newVisitSlice.actions;

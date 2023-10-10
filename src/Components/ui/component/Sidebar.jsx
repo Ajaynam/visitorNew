@@ -13,27 +13,23 @@ export default function Sidebar(props) {
     {
       title: 'Dashboard',
       routeLink: '/',
-      status:false,
       icon:<AiFillAppstore size={22} color='gray'/>
     },
     {
       title: 'Visitor Logbook',
       routeLink: 'visit-logbook',
-      status: false,
       icon: <FaListAlt size={20} color='gray' />
 
     },
     {
       title: 'New Invite',
       routeLink: 'new-invite',
-      status: false,
       icon: <MdInsertInvitation size={23} color='gray' />
 
     },
     {
       title: 'Manange Employees',
       routeLink: '/employee-table',
-      status: false,
       icon: <MdInsertInvitation size={23} color='gray' />
 
     }
@@ -41,7 +37,6 @@ export default function Sidebar(props) {
     {
       title: 'Logout',
       routeLink: '',
-      status: false,
       icon: <RiLogoutCircleRFill size={23} color='gray' />
 
     }
@@ -65,7 +60,6 @@ export default function Sidebar(props) {
                 props.sideBarOpen ?
                   
                   <Link to={data.routeLink} className={`focus:bg-gray-300 w-[90%] hover:bg-gray-300 p-2 rounded-lg flex items-center gap-2`} key={data.title} onClick={(e) => {
-                    sideBarElements[index].status = true
                     data.title === 'Logout' ?
                       <>
                         {dispatch(updateState())}
@@ -104,7 +98,10 @@ export default function Sidebar(props) {
             {
               sideBarElements.map((data, index) => {
                 return (
-                  <Link to={data.routeLink} className={`w-[90%] hover:bg-gray-300 p-2 rounded-lg flex items-center gap-2  ms-3`} onClick={() => { props.setMobileBar(prev => !prev) }}>
+                  <Link to={data.routeLink} className={`w-[90%] hover:bg-gray-300 p-2 rounded-lg flex items-center gap-2  ms-3`} onClick={() => {
+                    props.setMobileBar(prev => !prev)
+                    data.title === 'Logout' ? dispatch(updateState()):<></>
+                  }} >
                     {data.icon}
                     <>{data.title}</>
                   </Link>

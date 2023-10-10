@@ -5,6 +5,8 @@ import { setName, setMobile, setEmail, setAddress, setGender, setIdtype, setIdnu
 import { useDispatch, useSelector } from 'react-redux'
 import React, { useState } from 'react';
 import Header from '../../ui/component/Header';
+import { useNavigate } from 'react-router-dom';
+import $ from 'jquery'
 export default function Newinvite() {
 
     const inputClass = 'border-2 outline-none p-2 rounded mt-2 border-[rgba(0,0,0,0.1)] focus:border-violet-600 focus:border-[2px] resize-none';
@@ -49,6 +51,7 @@ export default function Newinvite() {
         purpose: 'Visit purpose'
     })
 
+    const Navigate = useNavigate();
 
     const executeBuying = () => {
         console.log(newVisit)
@@ -117,6 +120,9 @@ export default function Newinvite() {
             axios.post(newVisitAPI, newVisit)
                 .then((response) => {
                     console.log(response.data)
+                    if (response.data.success) {
+                        Navigate('/visitor-card', { state:{ cardId:response.data.cardId}})
+                    }
                 })
                 .catch((error) => {
                     console.log(error)
@@ -329,10 +335,10 @@ export default function Newinvite() {
 
             <div className='grid grid-cols-1 w-full mb-10'>
                 <div className='flex item-center justify-center md:justify-start gap-3'>
-                    <button className='text-white p-2 w-[15%] rounded bg-violet-600 hover:bg-violet-700' onClick={() => { executeBuying() }}>
+                    <button className='text-white p-2 w-[40%] md:w-[15%] rounded bg-violet-600 hover:bg-violet-700' onClick={() => { executeBuying() }}>
                         <h1 className='flex items-center justify-center gap-3'>Create Invite</h1></button>
                     <ToastContainer autoClose={2000} />
-                    <button className='text-violet-600 bg-white p-2 w-[15%] border border-violet-600 rounded hover:text-white hover:border-red-500 hover:bg-red-500' onClick={() => {
+                    <button className='text-violet-600 bg-white p-2 w-[40%] md:w-[15%] border border-violet-600 rounded hover:text-white hover:border-red-500 hover:bg-red-500' onClick={() => {
                         resetEmpty()
                         // $('#productCategory').val('0')
                         dispatch(resetNewBuying())

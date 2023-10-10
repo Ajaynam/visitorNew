@@ -7,97 +7,103 @@ import { BiSkipPrevious, BiSkipNext } from 'react-icons/bi'
 import { Tooltip, Zoom } from '@mui/material';
 import { MdOutlineDeleteOutline } from 'react-icons/md'
 import { Link } from 'react-router-dom';
+import { BiDownload } from 'react-icons/bi'
+import { BsSearch } from 'react-icons/bs'
+import { AiOutlineAppstoreAdd } from 'react-icons/ai'
+import baseurl from '../../../api/baseurl'
+import { error } from 'jquery';
 export default function EmployeeTable() {
 
-  const availableStocksAPI = 'http://localhost:8000/data/available-stock';
+  const getEmployeeAPi = `${baseurl}employee/get-all-employee`;
+  const searchEmployeeAPi = `${baseurl}employee/search-employee`;
+
 
   const elementClass = 'col-span-full md:col-span-1 flex items-start justify-center text-justify';
 
-  const [allStock, setAllStock] = useState([]);
+  const [allEmployeeList, setAllEmployeeList] = useState([]);
   const perPage = 10;
   const [startIndex, setstartIndex] = useState(0)
   const startPage = startIndex * perPage;
   const endPage = startPage + perPage;
-  const lastCount = Math.ceil(allStock.length / perPage);
+  const lastCount = Math.ceil(allEmployeeList.length / perPage);
   console.log('LC : ', lastCount)
-  const getAvailableStocks = () => {
-    axios.get(availableStocksAPI)
+
+
+
+  const getEmployeeList = () => {
+    axios.get(getEmployeeAPi)
       .then((response) => {
         console.log(response.data)
-        setAllStock(response.data)
+        setAllEmployeeList(response.data)
       })
       .catch((error) => {
         console.log(error.message)
       })
   }
 
+  const searchEmployee = (e) => {
+    if (e.target.value === '')
+      getEmployeeList();
+    else {
+      axios.post(searchEmployeeAPi, { key: e.target.value })
+        .then((response) => {
+        setAllEmployeeList(response.data)
+        })
+        .catch((error) => {
+        console.log(error)
+      })
+    }
+  }
+
   useEffect(() => {
-    getAvailableStocks();
+    getEmployeeList();
   }, [])
+
+
   return (
     <>
-      <div className="md:grid md:grid-cols-8">
-        <div className='md:col-span-7'>
-          <Header heading={'Employee List'} title={'All Employee'} />
-        </div>
-        <div className='md:col-span-1'>
-          <Link to='/add-employee'>
-            <button className="mt-4   bg-blue-500 text-white py-2 lg:px-8 px-16 rounded-[10px] hover:bg-blue-600 transition duration-300 ease-in-out"  >  Add New   </button>
+      <Header heading={'Employee List'} title={'All Employee'} />
 
-          </Link>
+      <div className='mb-2 flex items-center gap-2 justify-between w-full'>
+
+        <div className='flex items-center justify-center gap-2'>
+          <BsSearch className='text-gray-500' size={20} />
+          <input type='text' placeholder='Search...' className='border-2 outline-none px-1 md:px-5 py-[2px] rounded border-[rgba(0,0,0,0.1)] focus:border-violet-600 focus:border-[2px] resize-none' onChange={(e)=>{searchEmployee(e)}} ></input>
         </div>
+        <div className='flex justify-center items-center gap-2'>
+          <Link to='/add-employee' className='rounded bg-violet-600 hover:bg-violet-700 px-3 py-1 text-white flex items-center justify-center gap-2'>
+            Add employee
+            <AiOutlineAppstoreAdd />
+          </Link>
+          <button onClick={() => { exportExcelData() }} className='rounded bg-violet-600 hover:bg-violet-700 px-3 py-1 text-white flex items-center justify-center gap-2'>
+            Export
+            <BiDownload />
+          </button>
+        </div>      
       </div>
 
-      <div className='w-[100%] mt-2'>
+      <div className='w-[100%]'>
         <div className='bg-violet-500 grid grid-cols-6 p-2 text-white rounded-lg'>
           <div className={elementClass}><p>Id</p></div>
           <div className={elementClass}><p>Employee Name</p></div>
           <div className={elementClass}><p>Phone</p></div>
           <div className={elementClass}><p>Email</p></div>
           <div className={elementClass}><p>Department</p></div>
-          <div className={elementClass}><p>Action</p></div>
+          <div className={elementClass}><p>Role</p></div>
         </div>
         {
-          allStock.length ?
+          allEmployeeList.length ?
             <>
               {
-                allStock.slice(startPage, endPage).map((item, index) => {
+                allEmployeeList.slice(startPage, endPage).map((data, index) => {
                   return (
                     <div className={` grid grid-cols-6 p-2 text-gray-500 ${(index % 2 === 0) ? '' : 'bg-violet-100 rounded-lg'}`}>
-                      <div className={elementClass}><p>{index + 1}</p></div>
-                      <div className={elementClass}><p>{item.productcategory}</p></div>
-                      <div className={elementClass}><p>{item.productname}</p></div>
-                      <div className={elementClass}><p>{item.purchase_amount}</p></div>
-                      <div className={elementClass}><p>{item.purchased_date}</p></div>
-                      <div className='col-span-full md:col-span-1 flex items-start justify-center text-justify gap-3'>
-                        <Tooltip title={
-                          <React.Fragment>
-                            <h1 className='text-[10px]'>View</h1>
-                          </React.Fragment>
-                        } placement='left' arrow TransitionComponent={Zoom}>
-                          <button className='p-[5px] rounded bg-violet-600 hover:bg-violet-700'>
-                            <h1 className='text-white'><LuView size={10} /></h1>
-                          </button>
-                        </Tooltip>
-                        <Tooltip title={
-                          <React.Fragment>
-                            <h1 className='text-[10px]'>Edit</h1>
-                          </React.Fragment>
-                        } placement='top' arrow TransitionComponent={Zoom}>
-                          <button className='p-[5px] rounded bg-green-500 hover:bg-green-700'>
-                            <h1 className='text-white'><FiEdit2 size={10} /></h1>
-                          </button>
-                        </Tooltip>
-                        <Tooltip title={
-                          <React.Fragment>
-                            <h1 className='text-[10px]'>Delete</h1>
-                          </React.Fragment>
-                        } placement='right' arrow TransitionComponent={Zoom}>
-                          <button className='p-[5px] rounded bg-red-500 hover:bg-red-600'>
-                            <h1 className='text-white'><MdOutlineDeleteOutline size={10} /></h1>
-                          </button>
-                        </Tooltip>
-                      </div>
+                      <div className={elementClass}><p>{data.id}</p></div>
+                      <div className={elementClass}><p>{data.hostName}</p></div>
+                      <div className={elementClass}><p>{data.hostMobile}</p></div>
+                      <div className={elementClass}><p>{data.hostEmail}</p></div>
+                      <div className={elementClass}><p>{data.departmentName}</p></div>
+                      <div className={elementClass}><p>{data.roleName}</p></div>
                     </div>
                   )
                 })
@@ -108,7 +114,7 @@ export default function EmployeeTable() {
         }
       </div>
       {
-        allStock.length ?
+        allEmployeeList.length ?
           <div className=' w-[100%] text-violet-700 mt-7 flex items-center justify-center gap-x-5 '>
             <button className='p-1 bg-violet-100 rounded-full' onClick={() => {
               setstartIndex((prev) => {

@@ -1,8 +1,9 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Dashboard from '../../dashboard/component/Dashboard'
-import Loginwindow from '../../login/component/Loginwindow'
-import Newinvite from '../../newInvite/component/Newinvite'
+// import Loginwindow from '../../login/component/Loginwindow'
+import Login from '../../Auth/Login/Login'
+import Newinvite from '../../newInvite/Component/Newinvite'
 
 import VisitorCard from '../../VisitorCard/Components/VisitorCard'
 import UserProfile from '../../Profile/Components/Profile'
@@ -25,13 +26,11 @@ export default function Routingcomponent(props) {
                 <Dashboard />
               </React.Fragment>
             }></Route>
-
             {/* <Route path='/dashboard' element={
               <React.Fragment>
                 <Dashboard />
               </React.Fragment>
             }></Route> */}
-
             <Route path='/visit-logbook' element={
               <React.Fragment>
                 <Visitlogbook />
@@ -67,11 +66,17 @@ export default function Routingcomponent(props) {
                 <UserProfile />
               </React.Fragment>
             }></Route>
+
+            <Route path='/visitor-card' element={
+              <React.Fragment>
+                <VisitorCard />
+              </React.Fragment>
+            }></Route>
           </Routes>
           :
           <Routes>
             <Route path='*' element={
-              <Loginwindow setIsLogin={props.setIsLogin} />
+              <Login setIsLogin={props.setIsLogin} />
             }></Route>
           </Routes>
       }

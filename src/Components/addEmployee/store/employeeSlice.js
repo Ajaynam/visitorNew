@@ -1,29 +1,15 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import axios from 'axios'
-
-
-const newBuyingAPI = 'http://localhost:8000/store/new-buying';
-
-export const executeNewBuying = createAsyncThunk('executeBuying', async (newBuying) => {
-  try {
-    const response = await axios.post(newBuyingAPI, newBuying)
-    return response.data
-  } catch (error) {
-    return error
-  }
-})
 
 const initialState = {
-  name:'',
-  mobile:'',
-  email:'',
-  address:'',
-  gender:'',
-  password:'',
-  department:'',
-  databaseResponse: {},
-  loading: false,
-  error: ''
+  hostName: '',
+  hostMobile: '',
+  hostEmail: '',
+  hostAddress: '',
+  hostGender: '',
+  hostPassword: '',
+  hostRePassword: '',
+  departmentId: '',
+  roleId: ''
 }
 
 const newEmployeeSlice = createSlice({
@@ -31,58 +17,46 @@ const newEmployeeSlice = createSlice({
   initialState,
   reducers: {
     setName: (state, action) => {
-      state.name = action.payload
+      state.hostName = action.payload
     },
     setMobile: (state, action) => {
-      state.mobile = action.payload
+      state.hostMobile = action.payload
     },
     setEmail: (state, action) => {
-      state.email = action.payload
+      state.hostEmail = action.payload
     },
     setAddress: (state, action) => {
-      state.address=action.payload
+      state.hostAddress = action.payload
     },
     setGender: (state, action) => {
-      state.gender = action.payload
+      state.hostGender = action.payload
     },
- 
- 
- 
     setPassword: (state, action) => {
-      state.host = action.payload
+      state.hostPassword = action.payload
+    },
+    setRePassword: (state, action) => {
+      state.hostRePassword = action.payload
     },
     setDepartment: (state, action) => {
-      state.purpose = action.payload
+      state.departmentId = action.payload
+    },
+    setRole: (state, action) => {
+      state.roleId = action.payload
     },
     resetNewBuying: (state, action) => {
-      state.name = ''
-      state.mobile = ''
-      state.email = ''
-      state.gender = ''
-      state.password = ''
-      state.department = ''
-      state.address=''
-      state.databaseResponse = {}
-      state.loading= false
-      state.error= ''
+      state.hostName = ''
+      state.hostMobile = ''
+      state.hostEmail = ''
+      state.hostAddress = ''
+      state.hostGender = ''
+      state.hostPassword = ''
+      state.hostRePassword = ''
+      state.departmentId = ''
+      state.roleId = ''
     }
-  },
-  extraReducers: (builder) => {
-    builder.addCase(executeNewBuying.pending, (state, action) => {
-      state.loading = true
-    })
-    builder.addCase(executeNewBuying.fulfilled, (state, action) => {
-      state.loading = false
-      console.log(action.payload)
-    })
-    builder.addCase(executeNewBuying.rejected, (state, action) => {
-      state.loading = true
-      console.log('REJECTED.....................')
-      state.error = action.payload
-    })
   }
 })
 
-export const { setName, setMobile, setEmail,setAddress, setGender, setIdtype, setPassword,setDepartment, resetNewBuying } = newEmployeeSlice.actions;
+export const { setName,setMobile,setEmail,setAddress,setGender,setPassword,setRePassword,setDepartment,setRole,resetNewBuying } = newEmployeeSlice.actions;
 
 export default newEmployeeSlice.reducer;
