@@ -151,8 +151,9 @@ export default function EmployeeForm() {
     const inputClass = 'border-2 outline-none p-2 rounded mt-2 border-[rgba(0,0,0,0.1)] focus:border-violet-600 focus:border-[2px] resize-none';
     const inputClassEmpty = 'border-2 outline-none p-2 rounded mt-2 border-red-400 focus:border-violet-600 focus:border-[2px] resize-none';
 
-    const newEmployeeAPI = 'http://localhost:8000/visitor/new-visit';
-    const checkUserAPI = 'http://localhost:8000/data/check-user';
+    const newEmployeeAPI = 'http://localhost:8000/employe/new-employe';
+
+    // const checkUserAPI = 'http://localhost:8000/data/check-user';
 
     const dispatch = useDispatch();
 
@@ -167,8 +168,9 @@ export default function EmployeeForm() {
         email: true,
         password:true,
         gender: true,
-        address: true,
         department: true,
+        address: true,
+        
     })
 
     const [labels, setLabels] = useState({
@@ -177,8 +179,9 @@ export default function EmployeeForm() {
         email: ' email',
         password: ' password',
         gender: 'Select gender',
-        address: 'Complete address',
         department: 'Select host',
+        address: 'Complete address',
+       
     })
 
 
@@ -205,6 +208,11 @@ export default function EmployeeForm() {
             setLabels(prev => ({ ...prev, gender: 'Gender required!' }))
             flag = 0;
         }
+        if (newEmployee.department  === '') {
+            setEmptyData(prev => ({ ...prev, department : false }))
+            setLabels(prev => ({ ...prev, department : 'department required!' }))
+            flag = 0;
+        }
     
    
         if (newEmployee.address === '') {
@@ -219,11 +227,7 @@ export default function EmployeeForm() {
             setLabels(prev => ({ ...prev, password: 'password required!' }))
             flag = 0;
         }
-        if (newEmployee.department  === '') {
-            setEmptyData(prev => ({ ...prev, department : false }))
-            setLabels(prev => ({ ...prev, department : 'department required!' }))
-            flag = 0;
-        }
+     
         if (flag) {
             axios.post(newEmployeeAPI, newEmployee)
                 .then((response) => {
@@ -250,9 +254,10 @@ export default function EmployeeForm() {
             number: 'Contact number',
             email: ' email',
             gender: 'Select gender',
+            department: 'department',
             address: 'Complete address',
             password: 'password',
-            department: 'department',
+           
         })
     }
 
@@ -296,13 +301,15 @@ export default function EmployeeForm() {
                     <h1 className='text-black'>Employee personal details</h1>
                 </div>
 
-                {/* Visitor Name */}
+                {/* employe Name */}
                 <div className='flex flex-col'>
-                    <label htmlFor='visitorName' className={`${emptyData.name ? 'text-black' : 'text-red-500'}`}>{labels.name}</label>
-                    <input type='text' id='visitorName' className={emptyData.name ? inputClass : inputClassEmpty} placeholder='Visitor name...' value={newEmployee.name} onChange={(e) => {
+                    <label htmlFor='employeName' className={`${emptyData.name ? 'text-black' : 'text-red-500'}`}>{labels.name}</label>
+                    <input type='text' id='employeName' className={emptyData.name ? inputClass : inputClassEmpty} placeholder='employe name...' value={newEmployee.name} onChange={(e) => {
                         // fetchUsers(e)
                         dispatch(setName(e.target.value))
                     }} onClick={() => { resetEmpty() }}></input>
+                
+                    
                     {/* <div className='grid absolute bg-white w-[100] mt-20 max-h-60 overflow-auto shadow-xl border rounded'>
                                 {
                                     existingUser.map((item, index) => {
@@ -320,42 +327,54 @@ export default function EmployeeForm() {
                             </div> */}
                 </div>
 
-                {/* Visitor Number */}
+
                 <div className='flex flex-col'>
-                    <label htmlFor='visitorNumber' className={`${emptyData.num ? 'text-black' : 'text-red-500'}`}>{labels.number}</label>
-                    <input type='number' id='visitorNumber' className={emptyData.num ? inputClass : inputClassEmpty} placeholder='Visitor number...' value={newEmployee.mobile} onChange={(e) => { dispatch(setMobile(e.target.value)) }} onClick={() => { resetEmpty() }}></input>
+                    <label htmlFor='employePassword' className={`${emptyData.password ? 'text-black' : 'text-red-500'}`}>{labels.password}</label>
+                    <input type='text' id='employePassword' className={emptyData.password ? inputClass : inputClassEmpty} placeholder='employe name...' value={newEmployee.password} onChange={(e) => {
+                        // fetchUsers(e)
+                        dispatch(setPassword(e.target.value))
+                    }} onClick={() => { resetEmpty() }}></input> </div>
+
+                {/* employe Number */}
+                <div className='flex flex-col'>
+                    <label htmlFor='employeNumber' className={`${emptyData.num ? 'text-black' : 'text-red-500'}`}>{labels.number}</label>
+                    <input type='number' id='employeNumber' className={emptyData.num ? inputClass : inputClassEmpty} placeholder='employe number...' value={newEmployee.mobile} onChange={(e) => { dispatch(setMobile(e.target.value)) }} onClick={() => { resetEmpty() }}></input>
                 </div>
 
-                {/* Visitor Email */}
+                {/* employe Email */}
                 <div className='flex flex-col'>
-                    <label htmlFor='visitorEmail' className={`${emptyData.email ? 'text-black' : 'text-red-500'}`}>{labels.email}</label>
-                    <input type='text' id='visitorEmail' className={emptyData.email ? inputClass : inputClassEmpty} placeholder='Visitors email...' value={newEmployee.email} onChange={(e) => { dispatch(setEmail(e.target.value)) }} onClick={() => { resetEmpty() }}></input>
+                    <label htmlFor='employeEmail' className={`${emptyData.email ? 'text-black' : 'text-red-500'}`}>{labels.email}</label>
+                    <input type='text' id='employeEmail' className={emptyData.email ? inputClass : inputClassEmpty} placeholder='employes email...' value={newEmployee.email} onChange={(e) => { dispatch(setEmail(e.target.value)) }} onClick={() => { resetEmpty() }}></input>
                 </div>
                 <div className='flex flex-col'>
-                    <label htmlFor='visitorEmail' className={`${emptyData.password ? 'text-black' : 'text-red-500'}`}>{labels.password}</label>
-                    <input type='text' id='visitorEmail' className={emptyData.password ? inputClass : inputClassEmpty} placeholder='password' value={newEmployee.password} onChange={(e) => { dispatch(setPassword(e.target.value)) }} onClick={() => { resetEmpty() }}></input>
+                    <label htmlFor='employePassword' className={`${emptyData.password ? 'text-black' : 'text-red-500'}`}>{labels.password}</label>
+                    <input type='password' id='employePassword' className={emptyData.password ? inputClass : inputClassEmpty} placeholder='password' value={newEmployee.password} onChange={(e) => { dispatch(setPassword(e.target.value)) }} onClick={() => { resetEmpty() }}></input>
                 </div>
 
                 {/* Gender */}
                 <div className='flex flex-col'>
-                    <label htmlFor='visitorGender' className={`${emptyData.gender ? 'text-black' : 'text-red-500'}`}>{labels.gender}</label>
-                    <select id='visitorGender' className={emptyData.gender ? inputClass : inputClassEmpty} onChange={(e) => { dispatch(setGender(e.target.value)) }} onClick={(e) => { resetEmpty() }}>
+                    <label htmlFor='employeGender' className={`${emptyData.gender ? 'text-black' : 'text-red-500'}`}>{labels.gender}</label>
+                    <select id='employeGender' className={emptyData.gender ? inputClass : inputClassEmpty} onChange={(e) => { dispatch(setGender(e.target.value)) }} onClick={(e) => { resetEmpty() }}>
                         <option value='0'>Select Gender</option>
                         <option value='M'>Male</option>
                         <option value='F'>Female</option>
                         <option value='O'>Other</option>
                     </select>
                 </div>
+                <div className='flex flex-col'>
+                    <label htmlFor='employeDepartment' className={`${emptyData.department ? 'text-black' : 'text-red-500'}`}>{labels.department}</label>
+                    <input type='text' id='employeDepartment' className={emptyData.department ? inputClass : inputClassEmpty} placeholder='department' value={newEmployee.department} onChange={(e) => { dispatch(setDepartment(e.target.value)) }} onClick={() => { resetEmpty() }}></input>
+                </div>
             </div>
 
-            {/* Visitor's details */}
+            {/* employe's details */}
             <div className='grid w-[100%] md:grid-cols-2 lg:grid-cols-4 gap-5 gap-y-10 p-6 border rounded-lg mb-8'>
 
                 <div className='col-span-full text-lg font-semibold'>
                     <h1 className='text-black'>address details</h1>
                 </div>
 
-                {/* Visitor Address */}
+                {/* employe Address */}
                 <div className='flex flex-col col-span-full'>
                     <label htmlFor='purpose' className={`${emptyData.address ? 'text-black' : 'text-red-500'}`}>{labels.address}</label>
                     <textarea id='purpose' className={`${emptyData.address ? inputClass : inputClassEmpty}  h-32`} placeholder="enter full address..." value={newEmployee.address} onClick={() => { resetEmpty() }} onChange={(e) => { dispatch(setAddress(e.target.value)) }}></textarea>

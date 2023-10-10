@@ -9,7 +9,8 @@ import { MdOutlineDeleteOutline } from 'react-icons/md'
 import { Link } from 'react-router-dom';
 export default function EmployeeTable() {
 
-  const availableStocksAPI = 'http://localhost:8000/data/available-stock';
+  
+  const availableStocksAPI = 'http://localhost:8000/employe/getEmployees';
 
   const elementClass = 'col-span-full md:col-span-1 flex items-start justify-center text-justify';
 
@@ -34,6 +35,9 @@ export default function EmployeeTable() {
   useEffect(() => {
     getAvailableStocks();
   }, [])
+
+
+  
   return (
     <>
       <div className="md:grid md:grid-cols-8">
@@ -55,7 +59,7 @@ export default function EmployeeTable() {
           <div className={elementClass}><p>Phone</p></div>
           <div className={elementClass}><p>Email</p></div>
           <div className={elementClass}><p>Department</p></div>
-          <div className={elementClass}><p>Action</p></div>
+          <div className={elementClass}><p>Status</p></div>
         </div>
         {
           allStock.length ?
@@ -65,10 +69,10 @@ export default function EmployeeTable() {
                   return (
                     <div className={` grid grid-cols-6 p-2 text-gray-500 ${(index % 2 === 0) ? '' : 'bg-violet-100 rounded-lg'}`}>
                       <div className={elementClass}><p>{index + 1}</p></div>
-                      <div className={elementClass}><p>{item.productcategory}</p></div>
-                      <div className={elementClass}><p>{item.productname}</p></div>
-                      <div className={elementClass}><p>{item.purchase_amount}</p></div>
-                      <div className={elementClass}><p>{item.purchased_date}</p></div>
+                      <div className={elementClass}><p>{item.name}</p></div>
+                      <div className={elementClass}><p>{item.phone}</p></div>
+                      <div className={elementClass}><p>{item.email}</p></div>
+                      <div className={elementClass}><p>{item.department}</p></div>
                       <div className='col-span-full md:col-span-1 flex items-start justify-center text-justify gap-3'>
                         <Tooltip title={
                           <React.Fragment>
