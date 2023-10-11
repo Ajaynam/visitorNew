@@ -1,6 +1,5 @@
 // import React from 'react'
 // // import { Button } from '../../../components/ui'
-import React, { useState } from 'react'
 
 // function CheckinAndOut() {
 //     return (
