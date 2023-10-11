@@ -5,7 +5,7 @@ import Routingcomponent from './Components/routingComponent/component/Routingcom
 import { useState } from 'react';
 import Login from './Components/login/component/Login';
 import { useDispatch, useSelector } from 'react-redux'
-import {updateState} from './Components/login/store/authSlice'
+
 function App() {
 
   const isLogedIn = useSelector((state) => {

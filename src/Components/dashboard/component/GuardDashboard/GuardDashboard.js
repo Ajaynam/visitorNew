@@ -1,7 +1,6 @@
 import React from 'react'
 // src/components/Dashboard.js
 // import React from 'react';
-
 import CheckinAndOut from './CheckinAndOut.js';
 import Chart from '../../../ui/component/charts/Chart.js';
 import Card from '../../../ui/component/cards/Card.js';
