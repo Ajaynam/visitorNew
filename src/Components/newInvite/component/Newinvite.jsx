@@ -1,19 +1,19 @@
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { setName, setMobile, setEmail, setAddress, setGender, setIdtype, setIdnumber, setVisitDate, setCheckInTime, setHost, setPurpose, resetNewBuying } from '../store/newVisitSlice'
+import { setName, setMobile, setEmail, setAddress, setGender, setIdtype, setIdnumber, setVisitDate, setCheckInTime, setHost, setPurpose, resetNewVisit } from '../store/newVisitSlice'
 import { useDispatch, useSelector } from 'react-redux'
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from '../../ui/component/Header';
 import { useNavigate } from 'react-router-dom';
-import $ from 'jquery'
+import baseurl from '../../../api/baseurl'
 export default function Newinvite() {
 
     const inputClass = 'border-2 outline-none p-2 rounded mt-2 border-[rgba(0,0,0,0.1)] focus:border-violet-600 focus:border-[2px] resize-none';
     const inputClassEmpty = 'border-2 outline-none p-2 rounded mt-2 border-red-400 focus:border-violet-600 focus:border-[2px] resize-none';
 
     const newVisitAPI = 'http://localhost:8000/visitor/new-visit';
-    const checkUserAPI = 'http://localhost:8000/data/check-user';
+    const getAllHostApi = `${baseurl}employee/get-hosts`;
 
     const dispatch = useDispatch();
 
@@ -21,6 +21,8 @@ export default function Newinvite() {
 
         return state.newVisit;
     })
+
+    const [allHosts,setAllHosts]=useState([])
 
     const [emptyData, setEmptyData] = useState({
         name: true,
@@ -106,7 +108,7 @@ export default function Newinvite() {
         //     setLabels(prev => ({ ...prev, couttime: 'Check-Out time required!' }))
         //     flag = 0;
         // }
-        if (newVisit.host === '') {
+        if (newVisit.host === '' || newVisit.host==='0') {
             setEmptyData(prev => ({ ...prev, host: false }))
             setLabels(prev => ({ ...prev, host: 'Host name required!' }))
             flag = 0;
@@ -121,7 +123,12 @@ export default function Newinvite() {
                 .then((response) => {
                     console.log(response.data)
                     if (response.data.success) {
-                        Navigate('/visitor-card', { state:{ cardId:response.data.cardId}})
+                        toast.success('Visitor entry created')
+                        dispatch(resetNewVisit());
+                        setTimeout(() => {
+                            Navigate('/visitor-card', { state: { cardId: response.data.cardId } })
+                        },3000)
+                        
                     }
                 })
                 .catch((error) => {
@@ -181,9 +188,25 @@ export default function Newinvite() {
     //     }
     //   }
 
+    const getAllHost = () => {
+        axios.get(getAllHostApi)
+            .then((response) => {
+                console.log(response.data)
+                setAllHosts(response.data)
+            })
+            .catch((error) => {
+            console.log(error)
+        })
+    }
+
+    useEffect(() => {
+        getAllHost();
+    },[])
+
     return (
         <>
-            <Header heading={'New Invite'} title={'Fill information for creating new invite'} />
+            <ToastContainer autoClose={2000} />
+            <Header heading={'Add new entry'} title={'Fill information for creating new enrty'} />
             {/* <div className='absolute bg-[rgba(0,0,0,0.5)] h-[100%] w-[100%] top-[0] left-0'>
         ...
         </div> */}
@@ -318,11 +341,13 @@ export default function Newinvite() {
                         resetEmpty()
                     }}>
                         <option value='0'>Select host</option>
-                        <option value='1' className='hover:bg-red-500'>Host 1</option>
-                        <option value='2'>Host 2</option>
-                        <option value='3'>Host 3</option>
-                        <option value='4'>Host 4</option>
-                        <option value='5'>Host 5</option>
+                        {
+                            allHosts.map((host, index) => {
+                                return (
+                                    <option value ={host.id} key={index}>{host.hostName}</option>
+                                )
+                            })
+                        }
                     </select>
                 </div>
 
@@ -337,11 +362,11 @@ export default function Newinvite() {
                 <div className='flex item-center justify-center md:justify-start gap-3'>
                     <button className='text-white p-2 w-[40%] md:w-[15%] rounded bg-violet-600 hover:bg-violet-700' onClick={() => { executeBuying() }}>
                         <h1 className='flex items-center justify-center gap-3'>Create Invite</h1></button>
-                    <ToastContainer autoClose={2000} />
+                    
                     <button className='text-violet-600 bg-white p-2 w-[40%] md:w-[15%] border border-violet-600 rounded hover:text-white hover:border-red-500 hover:bg-red-500' onClick={() => {
                         resetEmpty()
                         // $('#productCategory').val('0')
-                        dispatch(resetNewBuying())
+                        dispatch(resetNewVisit())
                     }} >
                         <h1 className='flex items-center justify-center gap-3'>Clear</h1>
                     </button>

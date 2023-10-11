@@ -3,8 +3,7 @@
 import React from 'react';
 
 import { useDispatch } from 'react-redux';
-
-import {updateState} from '../../login/store/authSlice'
+import {} from '../../Auth/store/userSlice/authSlice'
 const Login = (props) => {
 
     const dispatch = useDispatch();
@@ -18,7 +17,7 @@ const Login = (props) => {
                 <form>
                     <div className="mb-4">
                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
-                            Username
+                            Mobile
                         </label>
                         <input
                             className="border rounded w-full py-2 px-3 focus:outline-none focus:border-blue-500"
@@ -46,7 +45,6 @@ const Login = (props) => {
                         <button
                             className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue active:bg-blue-700"
                             type="submit"
-                            onClick={()=>{dispatch(updateState(true))}}
                         >
                             Sign In
                         </button>

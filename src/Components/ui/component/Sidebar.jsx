@@ -13,7 +13,8 @@ export default function Sidebar(props) {
     {
       title: 'Dashboard',
       routeLink: '/',
-      icon:<AiFillAppstore size={22} color='gray'/>
+      icon: <AiFillAppstore size={22} color='gray' />,
+      ut:['admin','staff']
     },
     {
       title: 'Visitor Logbook',
@@ -22,18 +23,25 @@ export default function Sidebar(props) {
 
     },
     {
-      title: 'New Invite',
-      routeLink: 'new-invite',
+      title: 'New Entry',
+      routeLink: 'new-entry',
       icon: <MdInsertInvitation size={23} color='gray' />
 
     },
+    
     {
       title: 'Manange Employees',
-      routeLink: '/employee-table',
+      routeLink: 'employee-table',
       icon: <MdInsertInvitation size={23} color='gray' />
 
     }
     ,
+    {
+      title: 'Pending Entry',
+      routeLink: 'pending-entry',
+      icon: <MdInsertInvitation size={23} color='gray' />
+
+    },
     {
       title: 'Logout',
       routeLink: '',

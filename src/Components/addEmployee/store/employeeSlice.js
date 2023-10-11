@@ -8,7 +8,6 @@ const initialState = {
   hostGender: '',
   hostPassword: '',
   hostRePassword: '',
-  departmentId: '',
   roleId: ''
 }
 
@@ -37,13 +36,10 @@ const newEmployeeSlice = createSlice({
     setRePassword: (state, action) => {
       state.hostRePassword = action.payload
     },
-    setDepartment: (state, action) => {
-      state.departmentId = action.payload
-    },
     setRole: (state, action) => {
       state.roleId = action.payload
     },
-    resetNewBuying: (state, action) => {
+    resetNewEmp: (state, action) => {
       state.hostName = ''
       state.hostMobile = ''
       state.hostEmail = ''
@@ -51,12 +47,11 @@ const newEmployeeSlice = createSlice({
       state.hostGender = ''
       state.hostPassword = ''
       state.hostRePassword = ''
-      state.departmentId = ''
       state.roleId = ''
     }
   }
 })
 
-export const { setName,setMobile,setEmail,setAddress,setGender,setPassword,setRePassword,setDepartment,setRole,resetNewBuying } = newEmployeeSlice.actions;
+export const { setName, setMobile, setEmail, setAddress, setGender, setPassword, setRePassword, setRole, resetNewEmp } = newEmployeeSlice.actions;
 
 export default newEmployeeSlice.reducer;

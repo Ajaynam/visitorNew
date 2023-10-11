@@ -68,7 +68,7 @@ const newVisitSlice = createSlice({
     setPurpose: (state, action) => {
       state.purpose = action.payload
     },
-    resetNewBuying: (state, action) => {
+    resetNewVisit: (state, action) => {
       state.name = ''
       state.mobile = ''
       state.email = ''
@@ -101,6 +101,6 @@ const newVisitSlice = createSlice({
   // }
 })
 
-export const { setName, setMobile, setEmail,setAddress, setGender, setIdtype, setIdnumber,setVisitDate, setCheckInTime, setHost,setPurpose, resetNewBuying } = newVisitSlice.actions;
+export const { setName, setMobile, setEmail, setAddress, setGender, setIdtype, setIdnumber, setVisitDate, setCheckInTime, setHost, setPurpose, resetNewVisit } = newVisitSlice.actions;
 
 export default newVisitSlice.reducer;

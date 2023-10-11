@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import newVisitReducer from "../../Components/newInvite/store/newVisitSlice";
 import newEmployeeReducer from '../../Components/addEmployee/store/employeeSlice'
-import authSliceReducer from '../../Components/login/store/authSlice'
+import authSliceReducer from '../../Components/Auth/store/userSlice/authSlice'
 import storage from "redux-persist/lib/storage";
 import { persistReducer } from "redux-persist";
 import employeeSlice from "../../Components/EmploteeTable/store/employeeSlice";

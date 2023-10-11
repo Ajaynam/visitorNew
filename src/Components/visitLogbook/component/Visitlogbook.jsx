@@ -8,7 +8,6 @@ import { Tooltip, Zoom } from '@mui/material';
 import { MdOutlineDeleteOutline } from 'react-icons/md'
 import Header from '../../ui/component/Header';
 import { BsSearch } from 'react-icons/bs'
-import { error } from 'jquery';
 import * as XLSX from 'xlsx'
 import { BiDownload } from 'react-icons/bi'
 export default function Visitlogbook() {
@@ -56,9 +55,7 @@ export default function Visitlogbook() {
       const worksheet = XLSX.utils.json_to_sheet(visitorLogbook);
       const workbook = XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
-      //let buffer = XLSX.write(workbook, { bookType: "xlsx", type: "buffer" });
-      //XLSX.write(workbook, { bookType: "xlsx", type: "binary" });
-      XLSX.writeFile(workbook, "DataSheet.xlsx");
+      XLSX.writeFile(workbook, "visitorLogs.xlsx");
     }
   }
 
@@ -79,11 +76,13 @@ export default function Visitlogbook() {
             <BiDownload />
           </button>
         </div>
-        <div className='bg-violet-500 grid grid-cols-6 p-2 text-[12px] md:text-md-center text-white rounded-lg'>
+        <div className='bg-violet-500 grid grid-cols-8 p-2 md:text-md-center text-white rounded-lg'>
           <div className={elementClass}><p>Host</p></div>
           <div className={elementClass}><p>Visitor</p></div>
           <div className={elementClass}><p>Mobile</p></div>
           <div className={elementClass}><p>VID</p></div>
+          <div className={elementClass}><p>Created Date</p></div>
+          <div className={elementClass}><p>Created Time</p></div>
           <div className={elementClass}><p>Check-In</p></div>
           <div className={elementClass}><p>Check-Out</p></div>
         </div>
@@ -93,20 +92,45 @@ export default function Visitlogbook() {
               {
                 visitorLogbook.slice(startPage,endPage).map((item, index) => {
                   return (
-                    <div className={` overflow-auto grid grid-cols-6 p-2 text-gray-500 ${(index % 2 === 0) ? '' : 'bg-violet-100 rounded-lg'}`} key={index}>
+                    <div className={` overflow-auto grid grid-cols-8 p-2 text-gray-500 ${(index % 2 === 0) ? '' : 'bg-violet-100 rounded-lg'}`} key={index} id={item.visitorId} >
                       <div className={elementClass}><p>{item.hostName}</p></div>
                       <div className={elementClass}><p>{item.visitorName}</p></div>
                       <div className={elementClass}><p>{item.visitorMobile}</p></div>
                       <div className={elementClass}><p>{item.visitorId}</p></div>
-                      <div className={elementClass}><p>{item.checkInTime}</p></div>
-                      <div className={elementClass}>
-                        {
-                          item.checOutTime ?
-                            <p>{item.checOutTime}</p>:
-                            <p>Pending</p>
-                            
-                        }
-                      </div>
+                      <div className={elementClass}><p>{item.createdDate.slice(0,10)}</p></div>
+                      <div className={elementClass}><p>{item.entryTime}</p></div>
+                      {
+                        item.status === 'P' ?
+                          <>
+                            <div className={`${elementClass} text-yellow-500`}><p>Pending</p></div>
+                            <div className={`${elementClass} text-yellow-500`}><p>Pending</p></div>
+                          </> :<></>
+                          
+                      }
+                      {
+                        item.status === 'A' ?
+                          <>
+                            <div className={`${elementClass} text-green-500`}><p>Accepted</p></div>
+                            <div className={`${elementClass} text-yellow-500`}><p>Pending</p></div>
+                          </> : <></>
+
+                      }
+                      {
+                        item.status === 'R' ?
+                          <>
+                            <div className={`${elementClass} text-red-500`}><p>Rejected</p></div>
+                            <div className={`${elementClass} text-red-500`}><p>Rejected</p></div>
+                          </> : <></>
+
+                      }
+                      {
+                        item.status === 'C' ?
+                          <>
+                            <div className={`${elementClass} text-green-500`}><p>Completed</p></div>
+                            <div className={`${elementClass} text-green-500`}><p>Completed</p></div>
+                          </> : <></>
+
+                      }
                       {/* <div className='col-span-full md:col-span-1 flex items-start justify-center text-justify gap-3'>
                         <Tooltip title={
                           <React.Fragment>
