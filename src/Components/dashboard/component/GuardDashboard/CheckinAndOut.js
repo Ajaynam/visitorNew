@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-// import { Button } from '../../../components/ui'
 
 function CheckinAndOut() {
 
@@ -16,22 +15,18 @@ function CheckinAndOut() {
         event.preventDefault();
         setSubmitted(true);
 
-        // Simple validation: Check if the input is not empty
         if (visitorId.trim() === '') {
             setIsValid(false);
         } else {
             setIsValid(true);
-            // Handle the form submission here (e.g., send data to the server)
         }
     };
     return (
         <div>
             <div>
-                {/* <span>Please tap on button to check in</span> */}
                 <div className='lg:flex gap-4'>
                     <button
                         className="mt-4 bg-violet-500 text-white py-2 px-12  lg:px-8 md:px-16 rounded-[10px] hover:bg-violet-600 transition duration-300 ease-in-out"
-                    // onClick={handlePrint}
                     >
                         Visitor Check-In
                     </button>
