@@ -5,20 +5,17 @@ import GuardDashboard from './GuardDashboard/GuardDashboard';
 import AdminDashboard from './AdminDashboard/AdminDashboard';
 import StaffDashboard from './StaffDashboard/StaffDashboard';
 
-const Dashboard = ({ userRole }) => {
-  // const userData = useSelector(selectUser);
+const Dashboard = () => {
+  const userType = useSelector((state) => {
+    return state.authSlice.role
+  })
+
 
   return (
     <div>
-    {/* <GuardDashboard/> */}
-      {/* {userData.roles.includes('guard') && <GuardDashboard />} */}
-      {/* {userData.roles.includes('staff') && <StaffComponent />} */}
-      {/* {userData.roles.includes('guard') && <GuardComponent />} */}
-
-      {/* {userRole === 'admin' && <AdminDashboard />}
-      {userRole === 'staff' && <StaffDashboard />}
-      {userRole === 'guard' && <GuardDashboard />} */}
-      <GuardDashboard/>
+      {userType === 'Admin' ? <AdminDashboard />:<></>}
+      {userType === 'Employee' ? <StaffDashboard/>:<></>}
+      {userType === 'Guard' ? <GuardDashboard />:<></>}
     </div>
   );
 };

@@ -5,8 +5,8 @@ import { MdInsertInvitation } from 'react-icons/md'
 import {  RiLogoutCircleRFill } from 'react-icons/ri'
 import { FaListAlt } from 'react-icons/fa'
 import { Link } from 'react-router-dom';
-import { updateState } from '../../login/store/authSlice'
-import { useDispatch } from 'react-redux'
+import { logoutUser } from '../../Auth/store/userSlice/authSlice'
+import { useDispatch, useSelector } from 'react-redux'
 export default function Sidebar(props) {
   const dispatch = useDispatch();
   const sideBarElements = [
@@ -14,43 +14,54 @@ export default function Sidebar(props) {
       title: 'Dashboard',
       routeLink: '/',
       icon: <AiFillAppstore size={22} color='gray' />,
-      ut:['admin','staff']
+      ut:['Admin','Guard','Employee']
     },
     {
       title: 'Visitor Logbook',
       routeLink: 'visit-logbook',
-      icon: <FaListAlt size={20} color='gray' />
+      icon: <FaListAlt size={20} color='gray' />,
+      ut: ['Admin', 'Guard','Employee']
 
     },
     {
       title: 'New Entry',
       routeLink: 'new-entry',
-      icon: <MdInsertInvitation size={23} color='gray' />
+      icon: <MdInsertInvitation size={23} color='gray' />,
+      ut: ['Guard']
 
     },
     
     {
       title: 'Manange Employees',
       routeLink: 'employee-table',
-      icon: <MdInsertInvitation size={23} color='gray' />
+      icon: <MdInsertInvitation size={23} color='gray' />,
+      ut: ['Admin']
 
     }
     ,
     {
       title: 'Pending Entry',
       routeLink: 'pending-entry',
-      icon: <MdInsertInvitation size={23} color='gray' />
+      icon: <MdInsertInvitation size={23} color='gray' />,
+      ut: ['Employee']
 
     },
     {
       title: 'Logout',
       routeLink: '',
-      icon: <RiLogoutCircleRFill size={23} color='gray' />
+      icon: <RiLogoutCircleRFill size={23} color='gray' />,
+      ut: ['Admin', 'Guard', 'Employee']
 
     }
   ]
 
 
+  const userType = useSelector((state) => {
+    console.log(state)
+    return state.authSlice.role
+  })
+
+  console.log('sss',userType)
   
 
   return (
@@ -65,28 +76,35 @@ export default function Sidebar(props) {
           {
             sideBarElements.map((data, index) => {
               return (
-                props.sideBarOpen ?
-                  
-                  <Link to={data.routeLink} className={`focus:bg-gray-300 w-[90%] hover:bg-gray-300 p-2 rounded-lg flex items-center gap-2`} key={data.title} onClick={(e) => {
-                    data.title === 'Logout' ?
-                      <>
-                        {dispatch(updateState())}
-                      </> :
-                      <></>
-                  }}>
-                    {data.icon}
-                    {data.title}
-                  </Link>
-                  :
-                  <Tooltip title={
-                    <React.Fragment>
-                        <h1 className='text-[15px] m-1'>{data.title}</h1>
-                    </React.Fragment>
-                  } placement='right' arrow TransitionComponent={Zoom} key={data.title}>
-                    <Link to={data.routeLink} className={`w-[80%] justify-center hover:bg-gray-300 p-2 rounded-lg flex items-center gap-2`}>
-                      {data.icon}
-                    </Link>
-                  </Tooltip>
+                data.ut.includes(userType) ?
+                  <>
+                    {
+                      props.sideBarOpen ?
+
+                        <Link to={data.routeLink} className={`focus:bg-gray-300 w-[90%] hover:bg-gray-300 p-2 rounded-lg flex items-center gap-2`} key={data.title} onClick={(e) => {
+                          data.title === 'Logout' ?
+                            <>
+                              {dispatch(logoutUser())}
+                            </> :
+                            <></>
+                        }}>
+                          {data.icon}
+                          {data.title}
+                        </Link>
+                        :
+                        <Tooltip title={
+                          <React.Fragment>
+                            <h1 className='text-[15px] m-1'>{data.title}</h1>
+                          </React.Fragment>
+                        } placement='right' arrow TransitionComponent={Zoom} key={data.title}>
+                          <Link to={data.routeLink} className={`w-[80%] justify-center hover:bg-gray-300 p-2 rounded-lg flex items-center gap-2`}>
+                            {data.icon}
+                          </Link>
+                        </Tooltip>
+                    }
+                  </> :
+                  <></>
+                
                   
               )
             })
@@ -108,7 +126,7 @@ export default function Sidebar(props) {
                 return (
                   <Link to={data.routeLink} className={`w-[90%] hover:bg-gray-300 p-2 rounded-lg flex items-center gap-2  ms-3`} onClick={() => {
                     props.setMobileBar(prev => !prev)
-                    data.title === 'Logout' ? dispatch(updateState()):<></>
+                    data.title === 'Logout' ? dispatch(logoutUser()):<></>
                   }} >
                     {data.icon}
                     <>{data.title}</>

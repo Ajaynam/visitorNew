@@ -1,7 +1,6 @@
 import React from 'react'
 // src/components/Dashboard.js
 // import React from 'react';
-
 import CheckinAndOut from './CheckinAndOut.js';
 import Chart from '../../../ui/component/charts/Chart.js';
 import Card from '../../../ui/component/cards/Card.js';
@@ -55,8 +54,12 @@ export default function GuardDashboard() {
 
         </div>
         <div className="grid grid-cols-1 mt-6 md:grid-cols-4 gap-4 ">
-          <div className='col-span-2 mx-auto'></div>
-          <div className='col-span-2'>    <Chart data={chartData} /></div>
+          <div className='col-span-2 mx-auto'>
+            
+          </div>
+          <div className='col-span-2'>
+            <Chart data={chartData} />
+          </div>
 
         </div>
 

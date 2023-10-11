@@ -11,6 +11,9 @@ import { useSelector } from 'react-redux'
 import EmployeeForm from '../../addEmployee/components/EmployeeForm'
 import EmployeeTable from '../../employeeTable/components/EmployeeTable'
 import Visitlogbook from '../../visitLogbook/component/Visitlogbook'
+import AdminDashboard from '../../dashboard/component/AdminDashboard/AdminDashboard'
+import StaffDashboard from '../../dashboard/component/StaffDashboard/StaffDashboard'
+import GuardDashboard from '../../dashboard/component/GuardDashboard/GuardDashboard'
 
 export default function Routingcomponent(props) {
   const isLogedIn = useSelector((state) => {
@@ -23,7 +26,7 @@ export default function Routingcomponent(props) {
           <Routes>
             <Route path='/' element={
               <React.Fragment>
-                <Dashboard />
+                <Dashboard/>
               </React.Fragment>
             }></Route>
             {/* <Route path='/dashboard' element={
@@ -83,7 +86,7 @@ export default function Routingcomponent(props) {
           :
           <Routes>
             <Route path='*' element={
-              <Login setIsLogin={props.setIsLogin} />
+              <Login/>
             }></Route>
           </Routes>
       }
