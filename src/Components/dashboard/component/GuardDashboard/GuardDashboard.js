@@ -7,6 +7,7 @@ import Chart from '../../../ui/component/charts/Chart.js';
 import Card from '../../../ui/component/cards/Card.js';
 import Header from '../../../ui/component/Header.jsx';
 import EmployeeTable from '../../../employeeTable/components/EmployeeTable.js';
+import RecentTable from '../AdminDashboard/RecentTable.js';
 
 export default function GuardDashboard() {
 
@@ -56,7 +57,7 @@ export default function GuardDashboard() {
 
         </div>
         <div className="grid grid-cols-1 mt-6 md:grid-cols-4 gap-4 ">
-          <div className='col-span-2 mx-auto'></div>
+          <div className='col-span-2 mx-auto'><RecentTable/></div>
           <div className='col-span-2'>    <Chart data={chartData} /></div>
 
         </div>
